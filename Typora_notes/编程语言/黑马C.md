@@ -8,7 +8,7 @@
 
 ### C语言应用范围
 
-![image-20230115234625783](C:\Users\13192\AppData\Roaming\Typora\typora-user-images\image-20230115234625783.png)
+![image-20230115234625783](./assets/image-20230115234625783.png)
 
 ### 32个关键字
 
@@ -16,11 +16,11 @@
 
 ### 9个控制语句
 
-![image-20230116000330057](C:\Users\13192\AppData\Roaming\Typora\typora-user-images\image-20230116000330057.png)
+![image-20230116000330057](./assets/image-20230116000330057.png)
 
 ### 34种运算符
 
-![image-20230116000455808](C:\Users\13192\AppData\Roaming\Typora\typora-user-images\image-20230116000455808.png)
+![image-20230116000455808](./assets/image-20230116000455808.png)
 
 ### gcc
 
