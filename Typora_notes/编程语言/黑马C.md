@@ -960,6 +960,7 @@ printf("%s\n",fgets(str, sizeof(str), stdin));
 >
 > 1. 除了 ==sizeof（数组名）== 和 ==&数组名== 其他 ==数组名==都为首元素地址
 > 2. 32位/64位平台地址为 ==4字节/8字节==
+> 3. arr[0]   <= = 等价于 = =>  *(arr+0)
 >
 > 
 >
@@ -1015,6 +1016,23 @@ printf("%s\n",fgets(str, sizeof(str), stdin));
 > printf("%d\n", strlen(&arr));		//6       会有警告 strlen需要的是const char*类型 
 > printf("%d\n", strlen(&arr+1));		//随机值	但是给的是 char（*）[7]类型
 > printf("%d\n", strlen(&arr[0]+1));	//5
+> 
+> char *p = "abcdef";
+> printf("%d\n", sizeof(p));			//4、8 	p指代的是a的地址
+> printf("%d\n", sizeof(p+1));		//4、8
+> printf("%d\n", sizeof(*p));			//1
+> printf("%d\n", sizeof(p[0]));		//1		重点！！！ arr[0] == *(arr+0) 指针当作数组
+> printf("%d\n", sizeof(&p));			//4、8	地址的地址还是地址
+> printf("%d\n", sizeof(&p+1));		//4、8
+> printf("%d\n", sizeof(&p[0]+1));	//4、8
+> 
+> printf("%d\n", strlen(p));			//6
+> printf("%d\n", strlen(p+1));		//5
+> printf("%d\n", strlen(*p));			//err  相当于把97传入strlen 非法访问
+> printf("%d\n", strlen(p[0]));		//err	
+> printf("%d\n", strlen(&p));			//随机值  错题！！！ a地址的地址里面何时碰到\0未知	
+> printf("%d\n", strlen(&p+1));		//随机值  错题！！！
+> printf("%d\n", strlen(&p[0]+1));	//5
 > ```
 >
 > 
