@@ -932,6 +932,354 @@ printf("%s\n",fgets(str, sizeof(str), stdin));
 
 
 
+### 字符函数
+
+### strlen
+
+> size_t strlen ( const char * str );
+>
+> 参数1：指向的字符串必须要以 '\0' 结束
+>
+> 返回值：size_t，是无符号的
+
+
+
+> 模拟实现
+>
+> 方式1：
+>
+> ```C
+> //计数器方式
+> int my_strlen(const char * str)
+> {
+>  	int count = 0;
+>  	while(*str)
+> 	{
+>  		count++;
+>  		str++;
+>  	}
+>      return count;
+> }
+> ```
+>
+>  方式2：
+>
+> ```C
+> //不能创建临时变量计数器
+> int my_strlen(const char * str)
+> {
+>      if(*str == '\0')
+>      	return 0;
+>      else
+>      	return 1 + my_strlen(str+1);
+> }
+> ```
+>
+> 方式3：
+>
+> ```c
+> //指针 - 指针 的方式
+> int my_strlen(char *s)
+> {
+>        char *p = s;
+>        while(*p != ‘\0’ )
+>               p++;
+>        return p-s;
+> }
+> 
+> ```
+
+
+
+### strcpy
+
+> char* strcpy(char * destination, const char * source );
+>
+> - 源字符串必须以 '\0' 结束。 
+> - 会将源字符串中的 '\0' 拷贝到目标空间。 
+> - 目标空间必须足够大，以确保能存放源字符串。 
+> - 目标空间必须可变。
+
+> 模拟实现
+>
+> ```C
+> //1.参数顺序
+> //2.函数的功能，停止条件
+> //3.assert
+> //4.const修饰指针
+> //5.函数返回值
+> //6.题目出自《高质量C/C++编程》书籍最后的试题部分
+> char *my_strcpy(char *dest, const char*src)
+> { 
+> 	 char *ret = dest;
+> 	 assert(dest != NULL);
+>  	 assert(src != NULL);
+>  
+>      while((*dest++ = *src++)) //src的字符放到dest，当src为\0时，dest赋为0，并退出while
+>      {
+>            ;
+>      }
+>      return ret;
+> }
+> ```
+
+
+
+### strcat
+
+> char * strcat ( char * destination, const char * source );
+>
+> - 源字符串必须以 '\0' 结束。 
+> - 目标空间必须有足够的大，能容纳下源字符串的内容。
+> -  目标空间必须可修改。
+
+
+
+> 模拟实现
+>
+> ```c
+> char *my_strcat(char *dest, const char*src)
+> {
+> 	 char *ret = dest;
+> 	 assert(dest != NULL);
+>  	 assert(src != NULL);
+> 	 while(*dest)
+> 	 {
+>  		dest++;
+> 	 }
+> 	 while((*dest++ = *src++)) //简洁的代码，src后的\0也赋值给了dest
+>  	 {
+> 	      ;
+> 	 }
+> 	 return ret;
+> }
+> 
+> ```
+
+
+
+### strcmp
+
+> int strcmp ( const char * str1, const char * str2 );
+>
+> - 第一个字符串大于第二个字符串，则返回大于0的数字 
+> - 第一个字符串等于第二个字符串，则返回0 
+> - 第一个字符串小于第二个字符串，则返回小于0的数字
+
+> 模拟实现
+>
+> ```c
+> int my_strcmp (const char * src, const char * dest)
+> {
+>         assert(src != NULL);
+>         assert(dest != NULL);
+>         while( *src == *dest)
+>         {
+>             if(*dst == '\0')
+>                 return 0;
+>             ++src;
+>             ++dest;
+>         }
+> 
+>         if (*src > *dest)
+>             return 1;
+>         else
+>         	return -1 ;
+> }
+> ```
+>
+> 
+
+### strncpy
+
+> char * strncpy ( char * destination, const char * source, size_t num );
+>
+> - 拷贝num个字符从源字符串到目标空间。 
+> - 如果源字符串的长度小于num，则拷贝完源字符串之后，在目标的后边追加0，直到num个。
+
+
+
+### strncat
+
+> char * strncat ( char * destination, const char * source, size_t num );
+>
+> - sou按num个字符拼接到des
+
+
+
+### strstr
+
+> char * strstr ( const char *str1, const char * str2);
+>
+> - 查找字符串 ：在str1中 找 第一次出现 str2 字符串的 地址
+> - KMP算法
+
+> 模拟实现
+>
+> ```c
+> char * my_strstr (const char * str1, const char * str2)
+> {   
+>     assert(str1 != NULL);
+>     assert(str2 != NULL);
+>     char *s1;
+>     char *s2;
+>     char *cur = str1;
+>     if ( *s2 == '\0')     
+>         return s1;
+>     while (*cur)
+>     {
+>         s1 = cur;
+>         s2 = str2;
+>         while ( (*s1 != '\0') && (*s2 != '\0') && (*s1 == *s2) ) {
+>             s1++;
+>             s2++;
+>         }
+>         if(*s2 == '\0')
+>             return cur;
+>   		cur++;
+>     }
+>     return NULL;
+> }
+> ```
+>
+> 
+
+### strtok
+
+> char * strtok ( char * str, const char * sep );
+>
+> - sep参数是个字符串，定义了用作分隔符的字符集合 
+> - 第一个参数指定一个字符串，它包含了0个或者多个由sep字符串中一个或者多个分隔符分割的标记。
+> - strtok函数找到str中的下一个标记，并将其用 \0 结尾，返回一个指向这个标记的指针。（注： strtok函数会改变被操作的字符串，所以在使用strtok函数切分的字符串一般都是==临时拷贝的内容==并且可修改。） 
+> - strtok函数的第一个参数不为 NULL ，函数将找到str中第一个标记，strtok函数将保存它在字符串 中的位置。
+> - strtok函数的第一个参数为 NULL ，函数将在==同一个字符串中==被保存的位置开始，查找下一个标 记。 如果字符串中不存在更多的标记，则返回 NULL 指针。
+> - 如果字符串中不存在更多的标记，则返回 NULL 指针。
+
+
+
+### strerror
+
+> char * strerror ( int errnum );
+>
+> - 返回错误码，所对应的错误信息。
+> - strerror(errno)   errno是全局的错误码 头文件errno.h
+
+
+
+## 内存函数
+
+### memcpy
+
+> void * memcpy ( void * destination, const void * source, size_t num );
+>
+> - num是字节数
+> - 函数memcpy从source的位置开始向后复制num个字节的数据到destination的内存位置。
+> -  这个函数在遇到 '\0' 的时候并不会停下来。
+> -  如果source和destination有任何的重叠，复制的结果都是未定义的。
+> - ==不能有重叠==
+
+> 模拟实现
+>
+> ```c
+> void * my_memcpy(void* dest , const void * src , size_t num)
+> {
+>     void* ret = dest;
+>     assert(dest != NULL);
+>     assert(src != NULL);
+>     while(num--){
+>         *(char*)dest = *(char*)src;
+>         ++(char*)dest;
+>         ++(char*)src;
+>     }
+>     return ret;
+> }
+> ```
+>
+> 
+
+### memmove
+
+> void * memmove ( void * destination, const void * source, size_t num );
+>
+> - 和memcpy的差别就是memmove函数处理的源内存块和目标内存块是==可以重叠==的。 
+> - 如果源空间和目标空间出现重叠，就得使用memmove函数处理。
+
+> 模拟实现
+>
+> ```c
+> void * my_memmove(void * dest, void * src , size_t num){
+>     assert(dest != NULL);
+>     assert(src != NULL);
+>     void* ret = dest;
+>     if(dest < src || dest > (char*)src + count) //src从前向后拷贝 dest在前 src在后 
+>     {
+>         while(count--){
+>         	*(char*)dest = *(char*)src;
+>         	++(char*)dest;
+>         	++(char*)src;        
+>         }
+>     }
+>     else
+>     {
+>         //src从后往前拷贝 dest在后 src在前
+>         while(count--)
+>         {
+>         	*( (char*)dest + count) = *( (char*)src + count);
+>         }
+>     }
+>     return ret;
+> }
+> ```
+
+
+
+### memcmp
+
+> int memcmp(const void* buf1, const void* buf2, size_t num);
+>
+> - 比stcmp高级，可以比较内存
+
+
+
+### memset
+
+>  void* memset(void* dest,int c, size_t count);
+>
+> 参数1：目的地
+>
+> 参数2：放什么内容
+>
+> 参数3：设置几个字节
+>
+> - 内存设置
+
+
+
+### 字符分类函数
+
+|   函数   | 符合条件返回 真                                              |
+| :------: | :----------------------------------------------------------- |
+| iscntrl  | 任何控制字符                                                 |
+| isspace  | 空白字符：空格‘ ’，换页‘\f’，换行'\n'，回车‘\r’，制表符'\t'或者垂直制表符'\v' |
+| isdigit  | 十进制数字 0~9                                               |
+| isxdigit | 十六进制数字，包括所有十进制数字，小写字母a~f，大写字母A~F   |
+| islower  | 小写字母a~z                                                  |
+| isupper  | 大写字母A~Z                                                  |
+| isalpha  | 字母a~z 或 A~Z                                               |
+| isalnum  | 字母或者数字，a~z,A~Z,0~9                                    |
+| ispunct  | 标点符号，任何不属于数字或者字母的图形字符（可打印）         |
+| isgraph  | 任何图形字符                                                 |
+| isprint  | 任何可打印字符，包括图形字符和空白字符                       |
+
+
+
+### 字符转换函数
+
+|  函数   | 功能       |
+| :-----: | :--------- |
+| tolower | 转换成小写 |
+| toupper | 转换成大写 |
+
 ## 指针
 
 ### 看不懂这些再去对应学习
@@ -1033,11 +1381,169 @@ printf("%s\n",fgets(str, sizeof(str), stdin));
 > printf("%d\n", strlen(&p));			//随机值  错题！！！ a地址的地址里面何时碰到\0未知	
 > printf("%d\n", strlen(&p+1));		//随机值  错题！！！
 > printf("%d\n", strlen(&p[0]+1));	//5
+> 
+> ```
+>
+
+
+
+>```c
+>//二维数组
+>int a[3][4] = {0};
+>printf("%d\n",sizeof(a));			//48		
+>printf("%d\n",sizeof(a[0][0]));		//4
+>printf("%d\n",sizeof(a[0]));		//16	错题！！！  a[0]是第一行的数组名
+>printf("%d\n",sizeof(a[0]+1));		//4、8  错题！！！  不是第二行的地址
+>									//数组名+1 ，一维数组名加减的是 里面元素
+>									//	验证： *(a[0]+1) == a[0][1]
+>printf("%d\n",sizeof(*(a[0]+1)));	//4     错题！！！  不是第二行的数组名解引用
+>printf("%d\n",sizeof(a+1));			//4、8	数组名是首元素地址 第二行的地址
+>									// 高维向下看低维，二维数组名加减的是 一维数组名
+>									//  验证： *(a+1) == a[1]
+>printf("%d\n",sizeof(*(a+1)));		//16
+>printf("%d\n",sizeof(&a[0]+1));		//4、8	第二行数组a[1]的地址
+>printf("%d\n",sizeof(*(&a[0]+1)));	//16
+>printf("%d\n",sizeof(*a));			//16	数组名是首元素地址
+>printf("%d\n",sizeof(a[3]));		//16	错题！！！  sizeof不参与运算 相当于a[0]	
+>```
+
+
+
+### 笔试题
+
+> ```c
+> int main()
+> {
+>     int a[5] = { 1, 2, 3, 4, 5 };
+>     int *ptr = (int *)(&a + 1);
+>     printf( "%d,%d", *(a + 1), *(ptr - 1));
+>     return 0;
+> }
+> //程序的结果是什么？
+> 
+> //   2，5
+> ```
+>
+>  
+>
+> ```c
+> //已知，结构体Test类型的变量大小是20个字节
+> struct Test
+> {
+>  int Num;
+>  char *pcName;
+>  short sDate;
+>  char cha[2];
+>  short sBa[4];
+> }*p;
+> //假设p 的值为0x100000。 如下表表达式的值分别为多少？
+> 
+> int main()
+> {											//指针±整数 取决于指针类型
+>     p = (struct Test*)0x100000；
+>  printf("%p\n", p + 0x1);					//100000 + 20 ==> 0x100014
+>  printf("%p\n", (unsigned long)p + 0x1);	//0x100001
+>  printf("%p\n", (unsigned int*)p + 0x1);	//0x100004
+>  return 0;
+> }
+> 
+> ```
+>
+> ​	 
+
+
+
+> ```C
+> int main()
+> {
+>     int a[4] = { 1, 2, 3, 4 };
+>     int *ptr1 = (int *)(&a + 1);
+>     int *ptr2 = (int *)((int)a + 1);
+>     printf( "%x,%x", ptr1[-1], *ptr2);
+>     return 0;
+> }
+> //*(ptr1 - 1)
+> //4，0x 02 00 00 00
+> ```
+>
+> ![image-20230223111853740](./assets/image-20230223111853740-1677122335301-1-1677122338147-3-1677122350878-5.png)
+
+
+
+> ```c
+> #include <stdio.h>
+> int main()
+> {				//逗号表达式
+>     int a[3][2] = { (0, 1), (2, 3), (4, 5) };  //1  3  5  0  0  0
+>     int *p;
+>     p = a[0];
+>     printf( "%d", p[0]);  // 1
+>  return 0;
+> }
+> 
+> ```
+
+
+
+> ```c
+> int main()
+> {
+>     int a[5][5];
+>     int(*p)[4]; 
+>     p = a;
+>     printf( "%p,%d\n", &p[4][2] - &a[4][2], &p[4][2] - &a[4][2]);
+>     return 0;
+> }
+> // 指针 - 指针  ==》 指针之间元素的个数（有正负）
+> // -4 用 %p 打印 ==》 -4的补码直接当作地址 0xFFFC
+> //0xFFFC ， -4
+> ```
+
+
+
+> ```C
+> int main()
+> {
+>     int aa[2][5] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+>     int *ptr1 = (int *)(&aa + 1);
+>     int *ptr2 = (int *)(*(aa + 1));               //aa[1]
+>     printf( "%d,%d", *(ptr1 - 1), *(ptr2 - 1));
+>     return 0;
+> }
+> //10，5
+> ```
+
+
+
+> ```c
+> #include <stdio.h>
+> int main()
+> {
+>  char *a[] = {"work","at","alibaba"};
+>  char**pa = a;
+>  pa++;			//pa+1 ， char * * pa 的指针pa 跳过了一个char*
+>  printf("%s\n", *pa);		//at
+>  return 0;
+> }
+> ```
+
+
+
+> ```C
+> int main()
+> {
+>  char *c[] = {"ENTER","NEW","POINT","FIRST"};
+>  char**cp[] = {c+3,c+2,c+1,c};
+>  char***cpp = cp;
+>  printf("%s\n", **++cpp);		//POINT
+>  printf("%s\n", *--*++cpp+3);	//ER
+>  printf("%s\n", *cpp[-2]+3);	//ST
+>  printf("%s\n", cpp[-1][-1]+1);	//EW
+>  return 0;
+> }
 > ```
 >
 > 
-
-
 
 ### 指针的定义、使用
 
@@ -1470,6 +1976,10 @@ void* p;
 p = &a;
 printf("%d", *((int*)p) );
 ```
+
+
+
+## 结构体（自定义数据类型）
 
 
 
