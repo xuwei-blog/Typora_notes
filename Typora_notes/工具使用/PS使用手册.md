@@ -8,7 +8,7 @@
 
 ### 混合模式
 
-![image-20230115121942334](C:\Users\13192\AppData\Roaming\Typora\typora-user-images\image-20230115121942334.png)
+![image-20230115121942334](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230115121942334.png)
 
 - 覆盖组
 
@@ -20,7 +20,7 @@
   - ==变暗==    留下暗的
   - ==正片叠底==    越叠越暗
 
-  ![image-20230115122916305](./assets/image-20230115122916305.png)
+  ![image-20230115122916305](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230115122916305.png)
 
   > 结果为50，变暗
   >
@@ -30,9 +30,9 @@
 
   - 颜色加深
 
-  ![image-20230115123019386](./assets/image-20230115123019386.png)
+  ![image-20230115123019386](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230115123019386.png)
 
-  ![image-20230115123033560](./assets/image-20230115123033560.png)
+  ![image-20230115123033560](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230115123033560.png)
 
   > 原来暗的地方，变暗
   >
@@ -40,7 +40,7 @@
 
   - 线性加深
 
-  ![image-20230115123130540](./assets/image-20230115123130540.png)
+  ![image-20230115123130540](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230115123130540.png)
 
   > 过渡比 `颜色加深` 柔和
 
@@ -92,7 +92,7 @@
 
   - 亮光
 
-  ![image-20230115124504057](./assets/image-20230115124504057.png)
+  ![image-20230115124504057](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230115124504057.png)
 
   - 线性光
 
@@ -100,11 +100,11 @@
 
   - 点光
 
-  ![image-20230115124600375](./assets/image-20230115124600375.png)
+  ![image-20230115124600375](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230115124600375.png)
 
   - 实色混合
 
-  ![image-20230115124742605](./assets/image-20230115124742605.png)
+  ![image-20230115124742605](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230115124742605.png)
 
   > 处理完后，图中只有黑白两个颜色
 
@@ -112,7 +112,7 @@
 
   - 差值
 
-  ![image-20230115125310886](./assets/image-20230115125310886.png)
+  ![image-20230115125310886](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230115125310886.png)
 
   > 颜色一样，就为黑
   >
@@ -120,13 +120,13 @@
 
   - 减去
 
-  ![image-20230115125434655](./assets/image-20230115125434655.png)
+  ![image-20230115125434655](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230115125434655.png)
 
   > 图片大面积变深，用于高低频
 
   - 划分
 
-  ![image-20230115125542020](./assets/image-20230115125542020.png)
+  ![image-20230115125542020](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230115125542020.png)
 
   > 颜色会变亮
 

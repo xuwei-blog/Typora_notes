@@ -71,7 +71,7 @@ else:
 
 - 保留字
 
-![image-20230103152204438](./assets/image-20230103152204438.png)
+![image-20230103152204438](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230103152204438.png)
 
 #### 数据类型
 
@@ -85,7 +85,7 @@ else:
 
     - 反向递减序号
 
-    ![image-20230103153034331](./assets/image-20230103153034331.png)
+    ![image-20230103153034331](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230103153034331.png)
 
   - 字符串的使用
 

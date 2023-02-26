@@ -19,11 +19,11 @@
 
 ### 菜单栏
 
-![image-20230109230929342](./assets/image-20230109230929342.png)
+![image-20230109230929342](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230109230929342.png)
 
 ### 快捷工具栏
 
-![image-20230109230950786](./assets/image-20230109230950786.png)
+![image-20230109230950786](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230109230950786.png)
 
 按住`alt`,左击快捷工具栏，可以快速切换工具
 

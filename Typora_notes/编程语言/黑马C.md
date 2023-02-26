@@ -8,19 +8,19 @@
 
 ### C语言应用范围
 
-![image-20230115234625783](./assets/image-20230115234625783.png)
+![image-20230115234625783](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230115234625783.png)
 
 ### 32个关键字
 
-![image-20230124153026379](./assets/image-20230124153026379.png)
+![image-20230124153026379](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230124153026379.png)
 
 ### 9个控制语句
 
-![image-20230116000330057](./assets/image-20230116000330057.png)
+![image-20230116000330057](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230116000330057.png)
 
 ### 34种运算符
 
-![image-20230116000455808](./assets/image-20230116000455808.png)
+![image-20230116000455808](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230116000455808.png)
 
 ### gcc
 
@@ -30,7 +30,7 @@
 
 - gcc4步：预处理、编译、汇编、链接
 
-![image-20230124144149137](./assets/image-20230124144149137.png)
+![image-20230124144149137](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230124144149137.png)
 
 1. 预处理
 
@@ -95,7 +95,7 @@ CPU总线是64位，寄存器也是64位，向下兼容32位。
 
 - 寄存器名字
 
-![image-20230124151609670](./assets/image-20230124151609670.png)
+![image-20230124151609670](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230124151609670.png)
 
 
 
@@ -378,7 +378,7 @@ putchar('abc');
 
 1. VS2019怕用户输入的数据超出范围，导致丢失，报错
 
-![image-20230127132542253](./assets/image-20230127132542253.png)
+![image-20230127132542253](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230127132542253.png)
 
 > 宏定义==最好放在第一行==
 
@@ -553,7 +553,7 @@ C语言中，真用'1',  假用'0'
 >
 > 占用内存字节数少(值域小)的类型，向占用内存字节数多(值域大)的类型转换，以保证精度不降低。
 
-![2016-06-02_202741](./assets/clip_image002.jpg)
+![2016-06-02_202741](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/clip_image002.jpg)
 
 
 
@@ -1466,7 +1466,7 @@ printf("%s\n",fgets(str, sizeof(str), stdin));
 > //4，0x 02 00 00 00
 > ```
 >
-> ![image-20230223111853740](./assets/image-20230223111853740-1677122335301-1-1677122338147-3-1677122350878-5.png)
+> ![image-20230223111853740](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230223111853740-1677122335301-1-1677122338147-3-1677122350878-5.png)
 
 
 
@@ -2270,7 +2270,7 @@ printf("%d", *((int*)p) );
 
 #### 位段的应用
 
-![image-20230224133923728](./assets/image-20230224133923728.png)
+![image-20230224133923728](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230224133923728.png)
 
 
 

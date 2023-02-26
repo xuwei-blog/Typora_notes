@@ -251,5 +251,5 @@ printf("%c\n",\132);  //八进制132，十进制90，ASSIC码表对应 ‘Z’
 
 - ASCII码表
 
-![image-20230103130012418](./assets/image-20230103130012418.png)
+![image-20230103130012418](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230103130012418.png)
 

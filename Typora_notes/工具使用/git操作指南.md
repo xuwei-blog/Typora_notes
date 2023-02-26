@@ -98,7 +98,7 @@ git config --global user.name "xxxxww"
 git reset -hard 版本号
 ```
 
-![image-20221216001956126](./assets/image-20221216001956126.png)
+![image-20221216001956126](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20221216001956126.png)
 
 ## git分支指令
 
@@ -176,7 +176,7 @@ git merge origin/分支名
 git rebase -i 版本号  //从head到版本号 更新日志合并
 ```
 
-![image-20221231153353137](./assets/image-20221231153353137.png)
+![image-20221231153353137](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20221231153353137.png)
 
 > rebase操作会修改节点5、7的commit信息
 
@@ -202,7 +202,7 @@ git config --local mergetool.keepBackup false
 
 gitflow工作流
 
-![image-20221231180627894](./assets/image-20221231180627894.png)
+![image-20221231180627894](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20221231180627894.png)
 
 ## 代码检查
 

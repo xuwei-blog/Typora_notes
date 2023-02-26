@@ -24,7 +24,7 @@
 
 > 整体剪辑视频的窗口
 
-![image-20230106231238322](C:\Users\13192\AppData\Roaming\Typora\typora-user-images\image-20230106231238322.png)
+![image-20230106231238322](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230106231238322.png)
 
 
 
@@ -32,7 +32,7 @@
 
 > 预览的视频减少分辨率（==减少卡顿==）
 
-![image-20230106231338193](C:\Users\13192\AppData\Roaming\Typora\typora-user-images\image-20230106231338193.png)
+![image-20230106231338193](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230106231338193.png)
 
 ### 快捷键
 
@@ -80,7 +80,7 @@ beat edit
 
 ### 分屏
 
-![image-20230108161346353](./assets/image-20230108161346353.png)
+![image-20230108161346353](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230108161346353.png)
 
 1. 线性擦除（过渡完成%30，擦除角度120°）
 2. 打位置锚点（利用shift+方向键左右，==一帧结束伴随一帧开始==）
@@ -88,7 +88,7 @@ beat edit
 
 ### 轨道遮罩键
 
-![image-20230108163414253](./assets/image-20230108163414253.png)
+![image-20230108163414253](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230108163414253.png)
 
 1. 给背景套上==轨道遮罩键==
 2. 选择PNG格式的镂空视频轨道

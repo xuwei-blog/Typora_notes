@@ -12,13 +12,13 @@
 
 ### 直方图
 
-![image-20230122140719875](./assets/image-20230122140719875.png)
+![image-20230122140719875](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230122140719875.png)
 
 图片明暗分布示意图
 
 ### 色环
 
-![image-20230122142002431](./assets/image-20230122142002431.png)
+![image-20230122142002431](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230122142002431.png)
 
 > 如何增大青色C？
 >
@@ -124,7 +124,7 @@
 
 - 常见相机扩展名
 
-![image-20230122232941892](./assets/image-20230122232941892.png)
+![image-20230122232941892](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230122232941892.png)
 
 ### 色调曲线
 
