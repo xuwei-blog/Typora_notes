@@ -782,6 +782,110 @@ int arr[2][2][2] = {{1，2，3，4}，{5，6，7，8}}，
 
 
 
+### 柔性数组
+
+> 柔性数组（flexible array）
+>
+> C99 中，结构体中的==最后一个元素==允许是未知大小的数组，这就叫做『柔性数组』成员
+>
+> 柔性数组的大小是可以调整的
+
+#### 柔性数组的特点
+
+> 1. 结构体中的柔性数组成员前面必须至少一个其他成员。 
+> 2. sizeof 返回的这种结构体大小不包括柔性数组的内存。 
+> 3. 包含柔性数组成员的结构体用malloc ()函数进行内存的动态分配，并且分配的内存应该大于结构的大小，以适应柔性数组的预期大小。
+
+#### 为什么要有柔性数组
+
+> 1. 减少内存开辟的次数，减少忘记释放内存的可能性
+> 2. 用malloc开辟空间，次数越多，==太多内存碎片==，空间利用率差
+> 3. 开辟的内存空间，是==连续的空间==，访问效率更高
+
+
+
+> ```C
+> struct S{
+>     int n;
+>     int arr[0];
+> };
+> 
+> //如果编译不通过，则
+> struct S{
+>     int n;
+>     int arr[];
+> };
+> printf("%d\n",sizeof(struct S));  //  4
+> ```
+
+> 如何使用？
+>
+> ```C
+> struct S{
+>     int n;
+>     int arr[0];
+> };
+> int main(){
+>     struct S* ps = (struct S*)malloc(sizeof(struct S) + 5*sizeof(int));
+>     ps->n = 100;
+>     int i = 0;
+>     for(i = 0; i < 5; i++){
+>         ps->arr[i] = i;
+>     }
+>     struct S* ptr = realloc(ps,44); // 一共开辟1个int + 10个int
+>     if(ptr != NULL){
+>         ps = ptr; //开辟成功 则赋值
+>     }
+>     for(i = 5; i < 10; i++){
+>         ps->arr[i] = i;
+>     }
+>     
+>     for(i = 0; i < 10; i++){
+>         printf("%d\n",ps->arr[i];
+>     }
+>     //释放内存
+>     free(ps);
+>     ps = NULL;
+> }
+> ```
+>
+> 同样作用，可以写成
+>
+> ```C
+> struct S{
+>     int n;
+>     int* arr;
+> };
+> int main(){
+>     struct S* ps = (struct S*)malloc(sizeof(struct S));
+>     ps->arr = (int*)malloc(5*sizeof(int));
+> 
+>     int i = 0;
+>     for(i = 0; i < 5; i++){
+>         ps->arr[i] = i;
+>     }
+>     
+>     int * ptr = realloc(ps->arr,10*sizeof(int)); //调整大小
+>     if(ptr != NULL){
+>         ps = ptr; //开辟成功 则赋值
+>     }
+>     for(i = 5; i < 10; i++){
+>         ps->arr[i] = i;
+>     }
+>     
+>     for(i = 0; i < 10; i++){
+>         printf("%d\n",ps->arr[i];
+>     }
+>     //释放内存
+>     free(ps->arr);
+>     ps->arr = NULL;
+>     free(ps);
+>     ps = NULL;
+> }
+> ```
+
+
+
 ### 字符数组、字符串
 
 - 异同
@@ -2389,7 +2493,14 @@ printf("%d", *((int*)p) );
 
 ![image-20230228214251960](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202302282143463.png)
 
+![image-20230301130131919](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303011301085.png)
 
+
+
+> 1. 栈区（stack）：在执行函数时，函数内局部变量的存储单元都可以在栈上创建，函数执行结 束时这些存储单元自动被释放。栈内存分配运算内置于处理器的指令集中，效率很高，但是 分配的内存容量有限。 栈区主要存放运行函数而分配的局部变量、函数参数、返回数据、返 回地址等。 
+> 2. 堆区（heap）：一般由程序员分配释放， 若程序员不释放，程序结束时可能由OS回收 。分 配方式类似于链表。 
+> 3. 数据段（静态区）（static）存放全局变量、静态数据。程序结束后由系统释放。 
+> 4. 代码段：存放函数体（类成员函数和全局函数）的二进制代码。
 
 ### 为什么要有动态内存分配
 
@@ -2481,12 +2592,22 @@ printf("%d", *((int*)p) );
 > ```c
 > int * ptr = (int*)realloc(p,INT_MAX);
 > if(ptr != NULL){
->     p = ptr;
+>  p = ptr;
 > }
 > //使用完毕后
 > free(p);
 > p = NULL;
 > ```
+>
+> realloc实现malloc
+>
+> ```c
+> int * p = realloc(NULL,40);
+> ```
+
+
+
+
 
 
 
@@ -2495,10 +2616,218 @@ printf("%d", *((int*)p) );
 > 1. 开辟地址后，必须进行判断
 > 2. 开辟空间后，不能越界访问
 > 3. 避免对非动态开辟的内存使用free释放
+>
+> ```c
+> void test()
+> {
+> 	int i = 0;
+> 	int *p = (int *)malloc(10*sizeof(int));
+> 	if(NULL == p)
+> 	{
+> 		exit(EXIT_FAILURE);
+> 	}
+> 	for(i=0; i<10; i++)
+> 	{
+> 		*P++ = i;
+> 	}
+> 	free(p);		//释放的是开辟的内存空间 后面 的空间
+> }
+> 
+> ```
+>
+> 4. 避免free释放一块动态开辟内存的一部分
+>
+> ```C
+> void test()
+> {
+> 	int *p = (int *)malloc(100);
+>  	p++;
+>  	free(p);//p不再指向动态内存的起始位置
+> }
+> ```
+>
+> 5.  对同一块动态内存多次释放
+>
+> ```C
+> void test()
+> {
+> 	int *p = (int *)malloc(100);
+> 	free(p);
+> 	free(p);  //重复释放  原则：谁申请 谁回收
+> }
+> ```
+>
+> 6. 忘记释放开辟的内存（==内存泄漏==）
 
 
 
-下次课P64
+### 笔试题
+
+> 题目1：
+>
+> ```c
+> void GetMemory(char *p)
+> {
+> 	p = (char *)malloc(100);	//函数结束后，p找不到了，内存泄漏
+> }
+> 
+> void Test(void)
+> {
+> 	char *str = NULL;
+> 	GetMemory(str);				//传值 实际上str并没有开辟空间
+> 	strcpy(str, "hello world");	//空地址不能放数据，程序崩溃
+> 	printf(str);
+> }
+> ```
+>
+> 如何改进?
+>
+> 方式1：
+>
+> ```C
+> void GetMemory(char**p)
+> {
+> 	*p = (char *)malloc(100);
+> }
+> 
+> void Test(void)
+> {
+> 	char *str = NULL;
+> 	GetMemory(&str);				
+> 	strcpy(str, "hello world");
+> 	printf(str);
+>     
+>     free(str);
+>     str = NULL;
+> }
+> ```
+>
+> 方式2：
+>
+> ```C
+> char* GetMemory(char *p)
+> {
+> 	p = (char *)malloc(100);
+>     return p;
+> }
+> 
+> void Test(void)
+> {
+> 	char *str = NULL;
+> 	str = GetMemory(str);		
+> 	strcpy(str, "hello world");	
+> 	printf(str);
+>     
+>     free(str);
+>     str = NULL;
+> }
+> 
+> ```
+
+
+
+> 题目2：
+>
+> 返回==栈空间的地址==的问题
+>
+> ```C
+> char *GetMemory(void)
+> {
+> 	char p[] = "hello world";	//函数结束，空间会还给OS
+> 	return p;
+> }
+> 
+> void Test(void)
+> {
+> 	char *str = NULL;
+> 	str = GetMemory();
+> 	printf(str);
+> }
+> 
+> ```
+>
+> 类似的
+>
+> ```C
+> int * test()
+> {
+> 	int a = 10 ;
+> 	return &a;
+> }
+> 
+> int main()
+> {
+> 	int*p = test();
+>     *p = 20;
+> }
+> ```
+>
+> 但是
+>
+> ```C
+> int * test()
+> {
+> 	static int a = 10 ;	//a不在栈区 在静态区
+> 	return &a;
+> }
+> 
+> int main()
+> {
+> 	int*p = test();
+>     *p = 20;
+> }
+> ```
+>
+> ```C
+> int * test()
+> {
+> 	int *ptr = malloc(100);	//ptr虽然被销毁了，但空间地址 传 出去了
+> 	return ptr;
+> }
+> 
+> int main()
+> {
+> 	int*p = test();
+> }
+> ```
+
+> 题目3：
+>
+> ```c
+> void GetMemory(char **p, int num)
+> {
+> 	*p = (char *)malloc(num);	//*p 就是外面的 str
+> }
+> 
+> void Test(void)
+> {
+> 	char *str = NULL;
+> 	GetMemory(&str, 100);
+>  	strcpy(str, "hello");	//打印hello ， 存在内存泄漏
+>  	printf(str);
+> }
+> 
+> ```
+
+
+
+> 题目4：
+>
+> ```C
+> void Test(void)
+> {
+>  	char *str = (char *) malloc(100);
+> 	strcpy(str, "hello");
+>  	free(str);			//不使用空间后，str = NULL
+>  	if(str != NULL)
+>  	{
+> 		strcpy(str, "world");
+>  		printf(str);
+> 	}
+> }
+> ```
+
+
 
 ## 文件操作
 
