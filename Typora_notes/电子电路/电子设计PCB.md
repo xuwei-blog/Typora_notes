@@ -404,3 +404,131 @@
 > 不想改动的器件 - 选中 - 锁定位置
 
 ![image-20230301232131562](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303012321639.png)
+
+
+
+### 鼠线（飞线）
+
+> 复制PCB到当前PCB，勾选3项
+
+![image-20230302112529829](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021134936.png)
+
+> 绿色DRC报错，取消布线
+
+![image-20230302112604209](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021126283.png)
+
+> 隐藏飞线，按N - 隐藏连接 - 网络
+
+
+
+> 隐藏飞线 - panels - PCB - from to editor
+
+![image-20230302114540217](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021145270.png)
+
+> 高亮飞线
+
+![image-20230302115322401](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021153508.png)
+
+> 飞线不显示的原因：
+
+![image-20230302115712339](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021157411.png)
+
+
+
+### class类的创建和应用
+
+![image-20230302115819355](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021158399.png)
+
+> 设计 - 类 （进行分类设计）
+
+![image-20230302121005549](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021210607.png)
+
+> 设计 - 规则 - 根据类指定线宽
+
+![image-20230302121619473](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021216549.png)
+
+
+
+### 差分
+
+> 两根信号线一起走线，为了抵消噪声对信号的影响
+
+### 高效布线
+
+> 多根线一起走
+
+![image-20230302123308380](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021233455.png)
+
+> 隐藏部分元素
+
+![image-20230302125253800](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021252970.png)
+
+![image-20230302131158515](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021311599.png)
+
+### active route自动布线
+
+> 打开功能
+
+![image-20230302135136769](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021351810.png)
+
+> 选择config
+
+![image-20230302135222774](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021352843.png)
+
+> 激活功能
+
+![image-20230302142515348](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021425407.png)
+
+> 使用功能
+
+![image-20230302142654402](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021426534.png)
+
+> 绘制大概路线
+
+![image-20230302143302656](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021433738.png)
+
+### 泪滴
+
+> 泪滴的作用
+
+![image-20230302143537841](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021435907.png)
+
+> 什么是泪滴？ 一段圆弧
+
+![image-20230302143653825](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021436876.png)
+
+> 工具 - 泪滴
+
+![image-20230302144419427](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021444502.png)
+
+### 覆铜 
+
+> 放置 - 铺铜
+
+![image-20230302160942991](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021609030.png)
+
+![image-20230302161115999](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021611034.png)
+
+> 选中之后- 重新铺铜
+
+![image-20230302161235878](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021612928.png)
+
+> 避免死铜，避免覆铜网络和铺铜不一致
+
+![image-20230302161619526](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021616578.png)
+
+
+
+### cutout
+
+> 作用
+
+![image-20230302165339875](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021653919.png)
+
+> 放置 - 铺铜挖孔
+
+![image-20230302165449510](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303021654554.png)
+
+
+
+## 看到40集 没时间实操 开始糊涂了 需要再看
