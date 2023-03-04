@@ -217,29 +217,24 @@ extern int a;   //利用关键字extern
 
 
 
-### 整型
+### 整型的打印格式
 
-1. 打印格式
-
-%u			//打印无符号int类型
-%d			//打印有符号的10进制数
-%hd			//打印有符号short类型
-%ld			//打印有符号long类型
-%lld		//打印有符号long long类型
-
-%hu			//打印无符号short类型
-%lu			//打印无符号long类型
-%llu		//打印无符号long long类型
-
-%c			//打印字符
-%f			//打印单精度浮点数
-%lf			//打印双精度浮点数
-%p			//打印地址
-%x			//打印16进制数字，字母小写输出
-%X			//打印16进制数字，字母大写输出
-%o			//打印8进制数字
-
-
+| 符号 | 作用                         |
+| :--- | ---------------------------- |
+| %u   | 打印无符号int类型            |
+| %d   | 打印有符号的10进制数         |
+| %hd  | 打印有符号short类型          |
+| %ld  | 打印有符号long类型           |
+| %lld | 打印有符号long long类型      |
+| %hu  | 打印无符号short类型          |
+| %lu  | 打印无符号long类型           |
+| %llu | 打印无符号long long类型      |
+| %c   | 打印字符                     |
+| %f   | 打印单精度浮点数             |
+| %lf  | 打印双精度浮点数             |
+| %p   | 打印地址                     |
+| %x   | 打印16进制数字，字母小写输出 |
+| %X   | 打印16进制数字，字母大写输出 |
 
 ### sizeof
 
@@ -2431,6 +2426,8 @@ printf("%d", *((int*)p) );
 
 #### 大小端
 
+
+
 > ```C
 > int main(){
 >     int a = 0x11 22 33 44;
@@ -2871,4 +2868,220 @@ printf("%d", *((int*)p) );
 > 把10000存入内存
 >
 > ![image-20230303111845934](C:\Users\13192\AppData\Roaming\Typora\typora-user-images\image-20230303111845934.png)
+
+### 文件缓冲区
+
+> 数据放满缓冲区，才一起输入\输出
+
+![image-20230304094718665](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303040947752.png)
+
+### 文件指针
+
+> - 每个被使用的文件都在内存中开辟了一个相应的文件信息区，用来存放文件的相关信息（如==文件的名字==，==文件状态==及==文件当前的位置==等）
+>
+> - 这些信息是保存在一个==结构体变量中==的。该结构体类型是有系统声明的，取名FILE
+>
+>   - ```C
+>     struct _iobuf {
+>             char *_ptr;
+>             int   _cnt;
+>             char *_base;
+>             int   _flag;
+>             int   _file;
+>             int   _charbuf;
+>             int   _bufsiz;
+>             char *_tmpfname;
+>     };
+>     typedef struct _iobuf FILE;
+>     ```
+>
+>   
+
+### 文件打开关闭
+
+```C
+//打开文件
+FILE * fopen ( const char * filename, const char * mode );
+//关闭文件
+int fclose ( FILE * stream );
+```
+
+> FILE * fopen ( const char * filename, const char * mode );
+>
+> 参数1：文件名
+>
+> 参数2：打开模式
+
+> int fclose ( FILE * stream );
+>
+> 参数：文件流
+
+> 使用方式：
+>
+> ```C
+> //文件打开
+> FILE* pf = fopen("test.txt","r");
+> if(pf == NULL){
+>     printf("%s\n",strerror(errno));
+>     return 0;
+> }
+> //文件使用  ......
+> //文件关闭
+> fclose(pf);
+> pf = NULL;
+> 
+> ```
+>
+> 
+
+### 文件打开模式
+
+> 读就是将cpu中的数据送到内存或磁盘
+>
+> 写就是将内存或磁盘中的数据送入cpu
+
+| 文件使用方式  |                     含义                     | 如果指定文件不存在 |
+| :-----------: | :------------------------------------------: | :----------------: |
+|  “r”（只读）  | 为了输入数据，打开一个==已经存在==的文本文件 |        出错        |
+|  “w”（只写）  |        为了输出数据，打开一个文本文件        |  建立一个新的文件  |
+|  “a”（追加）  |             向文本文件尾添加数据             |  建立一个新的文件  |
+| “rb”（只读）  |       为了输入数据，打开一个二进制文件       |        出错        |
+| “wb”（只写）  |       为了输出数据，打开一个二进制文件       |  建立一个新的文件  |
+| “ab”（追加）  |          向一个二进制文件尾添加数据          |        出错        |
+| “r+”（读写）  |         为了读和写，打开一个文本文件         |        出错        |
+| “w+”（读写）  |         为了读和写，建议一个新的文件         |  建立一个新的文件  |
+| "a+”（读写）  |        打开一个文件，在文件尾进行读写        |  建立一个新的文件  |
+| "rb+”（读写） |         为了读和写打开一个二进制文件         |        出错        |
+| “wb+”（读写） |      为了读和写，新建一个新的二进制文件      |  建立一个新的文件  |
+| “ab+”（读写） |    打开一个二进制文件，在文件尾进行读和写    |  建立一个新的文件  |
+
+### 文件函数
+
+|      功能      | 函数名  |   适用于   |
+| :------------: | :-----: | :--------: |
+|  字符输入函数  |  fgetc  | 所有输入流 |
+|  字符输出函数  |  fputc  | 所有输出流 |
+| 文本行输入函数 |  fgets  | 所有输入流 |
+| 文本行输出函数 |  fputs  | 所有输出流 |
+| 格式化输入函数 | fscanf  | 所有输入流 |
+| 格式化输出函数 | fprintf | 所有输出流 |
+|   二进制输入   |  fread  |    文件    |
+|   二进制输出   | fwrite  |    文件    |
+
+> char* fgets(char * string,int n , FILE * stream);
+>
+> 参数1：读到哪去
+>
+> 参数2：读几个元素
+>
+> 参数3：从哪里读
+>
+> 细节：==文本中换行符也会读入==
+>
+> 如何使用：
+>
+> ```C
+> char buf[1024] = {0};
+> FILE * pf = fopen("test.txt","r");
+> if(pf == NULL){
+>     return 0;
+> }
+> fgets(buf,1024,pf);		//文件函数
+> printf("%s",buf);
+> fclose(pf);
+> pf = NULL;
+> ```
+
+#### 函数对比
+
+> ![image-20230304152627983](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303041526036.png)
+>
+> 函数的区别：
+>
+> 1. printf默认stdout，fprintf更加灵活
+
+![image-20230304160723139](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303041607200.png)
+
+> 字符串和结构体的互动：
+>
+> ```c
+> struct S{
+>     int n ;
+>     float score;
+>     char arr[10];
+> };
+> int main(){
+>     struct S s = {100,3.14f,"abc"};
+>     struct S tmp = {0};
+>     char buf[1024] = {0};
+>     sprintf(buf,"%d %f %s",s.n,s.score,s.arr);				//输出到buf
+>     sscanf(buf,"%d %f %s",&(tmp.n),&(tmp.score),tmp.arr);	//将buf数据读入到tmp
+>     
+> }
+> ```
+
+#### 二进制形式
+
+> size_t fwrite(const void * buffer,size_t size, size_t count, FILE * stream);
+>
+> 参数1：数据从哪来
+>
+> 参数2：一个数据的大小
+>
+> 参数3：数据的个数
+>
+> 参数4：写到哪里去
+
+> size_t  fread(const void * buffer,size_t size, size_t count, FILE * stream);
+>
+> 参数1：数据读到哪里去
+>
+> 参数2：一个数据的大小
+>
+> 参数3：数据的个数
+>
+> 参数4：从哪读数据
+
+
+
+### 流stream
+
+> 默认打开了两个流设备
+>
+> 键盘 - 默认输入设备
+>
+> 屏幕 - 标准输出设备
+
+> 默认打开：
+>
+> stdin
+>
+> stdout
+>
+> stderr
+
+> 使用方式：
+>
+> ```C
+> int ch = fgets(stdin);	//键盘输入
+> fputc(ch, stdout);		//屏幕输出
+> ```
+
+### 文件的随机读写
+
+> fseek
+>
+> 根据文件指针的位置和偏移量来定位文件指针
+
+> int fseek ( FILE * stream, long int offset, int origin );
+>
+> 参数1：文件指针
+>
+> 参数2：偏移量
+>
+> 参数3：文件指针的当前位置
+>
+> - SEEK_CUR	文件指针的当前位置
+> - SEEK_END     文件的末尾位置
+> - SEEK-SET        文件的起始位置
 
