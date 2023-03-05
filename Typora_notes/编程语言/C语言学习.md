@@ -1263,7 +1263,11 @@ printf("%s\n",fgets(str, sizeof(str), stdin));
 > - 返回错误码，所对应的错误信息。
 > - strerror(errno)   errno是全局的错误码 头文件errno.h
 
-
+> ```C
+> perror("错误码");//错误码："错误提示"
+> ```
+>
+> 使用==比strerror方便==
 
 ## 内存函数
 
@@ -1294,7 +1298,8 @@ printf("%s\n",fgets(str, sizeof(str), stdin));
 > }
 > ```
 >
-> 
+
+
 
 ### memmove
 
@@ -3031,6 +3036,8 @@ int fclose ( FILE * stream );
 > 参数3：数据的个数
 >
 > 参数4：写到哪里去
+>
+> 返回值：处理的元素个数（如果没处理返回0）
 
 > size_t  fread(const void * buffer,size_t size, size_t count, FILE * stream);
 >
@@ -3041,6 +3048,8 @@ int fclose ( FILE * stream );
 > 参数3：数据的个数
 >
 > 参数4：从哪读数据
+>
+> 返回值：处理的元素个数（如果没处理返回0）
 
 
 
@@ -3069,8 +3078,8 @@ int fclose ( FILE * stream );
 
 ### 文件的随机读写
 
-> fseek
->
+#### fseek
+
 > 根据文件指针的位置和偏移量来定位文件指针
 
 > int fseek ( FILE * stream, long int offset, int origin );
@@ -3084,4 +3093,223 @@ int fclose ( FILE * stream );
 > - SEEK_CUR	文件指针的当前位置
 > - SEEK_END     文件的末尾位置
 > - SEEK-SET        文件的起始位置
+
+> 如何使用：
+>
+> ```C
+> fssek(pf,2,SEEK_END);
+> ```
+
+
+
+#### ftell
+
+> 返回文件指针相对于起始位置的偏移量
+
+> long int ftell ( FILE * stream );
+
+
+
+#### frewind
+
+> 让文件指针的位置回到文件的起始位置
+
+> void rewind ( FILE * stream );
+
+### 文件结束判定
+
+#### feof
+
+> EOF - end of file 文件结束标志
+
+> 牢记：在文件读取过程中，不能用feof函数的返回值直接用来判断文件的是否结束。
+>
+> 而是应用于当文件读取结束的时候，判断==是读取失败结束，还是遇到文件尾结束==
+
+#### 处理文本文件
+
+> ```C
+> #include <stdio.h>
+> #include <stdlib.h>
+> int main(void)
+> {
+>     	int c; // 注意：int，非char，要求处理EOF
+>     	FILE* fp = fopen("test.txt", "r");
+>     	if(!fp) {
+>         	perror("File opening failed");
+>         	return EXIT_FAILURE;
+>    	}
+>  	//fgetc 当读取 失败的时候 或者 遇到文件结束的时候，都会返回EOF
+>     	while ((c = fgetc(fp)) != EOF) // 标准C I/O读取文件循环
+>    	{ 
+>        	putchar(c);
+>    	}
+>  	//判断是什么原因结束的
+>     	if (ferror(fp))					//判断是否读取失败
+>         	puts("I/O error when reading");
+>     	else if (feof(fp))				//判断是否是碰到文件结束
+>         	puts("End of file reached successfully");
+>     	 	fclose(fp);
+>     	 	fp = NULL;
+> }
+> ```
+
+#### 处理二进制文件
+
+> ```C
+> #include <stdio.h>
+> enum { SIZE = 5 };
+> int main(void)
+> {
+>     double a[SIZE] = {1.0, 2.0, 3.0, 4.0, 5.0 };
+> 	double b = 0.0;
+>     size_t ret_code = 0;
+>     FILE *fp = fopen("test.bin", "wb"); // 必须用二进制模式
+>     fwrite(a, sizeof *a, SIZE, fp); // 写 double 的数组
+>     fclose(fp);
+>     
+> 
+>     fp = fopen("test.bin","rb");
+>     // fread返回值为0时，读入完毕
+>     while( ret_code == fread(&b, sizeof(double), 1, fp )) >= 1 )
+>     {
+>         printf("lf\n",b);
+>     } 
+>     //判断文件结束的原因
+>     if (feof(fp))
+>          printf("Error reading test.bin: unexpected end of file\n");
+>     else if (ferror(fp)) 
+>         perror("Error reading test.bin");
+>     fclose(fp);
+> 	fp = NULL;
+> }
+> 
+> ```
+>
+
+
+
+## 预处理
+
+![image-20230305232255961](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303052322062.png)
+
+### 预编译
+
+> 执行的功能（文本操作）：
+>
+> 1. #include
+> 2. 注释删除
+> 3. #define
+
+### 编译
+
+> 执行的功能：
+>
+> 1. 语法分析
+> 2. 词法分析（编译原理，语法树）
+> 3. 语义分析
+> 4. 符号汇总
+
+### 汇编
+
+> 执行的功能：
+>
+> 1. 形成符号表（符号名 和 地址）
+
+
+
+### 链接
+
+> 执行的功能：
+>
+> 1. 合并段表（每个文件都有1个elf文件格式）
+> 2. 符号表的合并和重定位（选择有效的符号地址）
+
+
+
+### 预定义符号
+
+> ```C
+> __FILE__     	 //进行编译的源文件
+> __LINE__    	 //文件当前的行号
+> __DATE__   	 	 //文件被编译的日期
+> __TIME__    	 //文件被编译的时间
+> __STDC__    	 //如果编译器遵循ANSI C，其值为1，否则未定义
+> __FUNCITON__	 //函数名	
+> ```
+
+> ```C
+> printf("%s\n",__FILE__); //打印文件名
+> ```
+>
+> ```C
+> printf("%s\n",__LINE__); //打印行号
+> ```
+>
+> ```C
+> printf("%s\n",__ANSI__); //打印行号
+> ```
+
+
+
+### 预处理指令
+
+> #开头的指令，都叫预处理指令
+>
+> ```c
+> # define
+> #include
+> #pragma pack(4)
+> #pragame
+> #if
+> #endif
+> #ifdef
+> #line
+> ```
+
+### 定义标识符
+
+> ```C
+> #define reg register
+> #define do_forever for(;;)
+> #define CASE break;case
+> // 如果定义的 stuff过长，可以分成几行写，除了最后一行外，每行的后面都加一个反斜杠(续行符)。
+> #define DEBUG_PRINT printf("file:%s\tline:%d\t \
+>                           date:%s\ttime:%s\n" ,\
+> 							__FILE__,__LINE__ ,\
+> 							__DATE__,__TIME__ ) 
+> ```
+
+
+
+> ```C
+> #define do_forever for(;;)
+> int main(){
+>     do_forever;				//一定要加 ; ，因为不加分号 return 0 会成为for循环的代码块
+>     return 0;
+> }
+> ```
+
+
+
+> 在define定义标识符的时候，要不要在最后加上 ; 
+>
+> ```C
+> #define MAX 1000;
+> if(condition)
+>      max = MAX;
+> else
+>      max = 0;
+> ```
+>
+> if不加{}只会执行一句代码
+
+
+
+> ```C
+> #define MAX 1000;
+> printf("%d\n",MAX);	
+> ```
+>
+> 语法错误
 
