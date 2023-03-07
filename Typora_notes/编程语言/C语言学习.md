@@ -3477,4 +3477,187 @@ int fclose ( FILE * stream );
 > #undef MAX	//移除宏定义
 > ```
 >
+
+### 命令行定义
+
+> 许多C 的编译器提供了一种能力，允许在==命令行中定义符号==。预编译阶段替换。
+
+> ```C
+> #include <stdio.h>
+> int main()
+> {
+>     int array [ARRAY_SIZE];
+>     int i = 0;
+>     for(i = 0; i< ARRAY_SIZE; i ++)
+>    {
+>         array[i] = i;
+>    }
+>     for(i = 0; i< ARRAY_SIZE; i ++)
+>    {
+>         printf("%d " ,array[i]);
+>    }
+>     printf("\n" );
+>     return 0;
+> }
+> ```
+>
+> ```
+> gcc -D ARRAY_SIZE=10 programe.c
+> ```
+
+### 条件编译
+
+> 是否让代码参与编译，选择性地编译代码
+
+> ```C
+> int main()
+> {
+>  	int i = 0;
+>  	int arr[10] = {0};
+>  	for(i=0; i<10; i++)
+>  	{
+>  		arr[i] = i;
+> #ifdef DEBUG			//如果没有定义DEBUG 预处理阶段，把这行去掉
+>  		printf("%d\n", arr[i]);
+> #endif 
+>  	}
+>  	return 0;
+> }
+> ```
+>
+> ```C
+> //如何定义
+> #define DEBUG 1 //随便定义一下就行
+> ```
+
+#### 常见的条件编译
+
+> ```C
+> //情况1
+> #if 1
+>  	//...
+> #endif
 > 
+> //情况2
+> #define DEBUG 1
+> #if DEBUG
+>  	//..
+> #endif
+> ```
+>
+> 多个分支的条件编译
+>
+> ```C
+> #if 常量表达式
+>  //...
+> #elif 常量表达式
+>  //...
+> #else
+>  //...
+> #endif
+> ```
+>
+> 判断是否被定义
+>
+> ```C
+> //以下两句等效
+> #if defined(symbol)
+> #ifdef symbol
+> //以下两句等效
+> #if !defined(symbol)
+> #ifndef symbol
+> 
+> #endif
+> ```
+>
+> 嵌套指令
+>
+> ```C
+> #if defined(OS_UNIX)
+>  	#ifdef OPTION1
+>  		unix_version_option1();
+>  	#endif
+>  	#ifdef OPTION2
+> 	 	unix_version_option2();
+> 	 #endif
+> #elif defined(OS_MSDOS)
+> 	 #ifdef OPTION2
+> 	 	msdos_version_option2();
+>  	 #endif
+> #endif
+> ```
+
+### 文件包含头文件
+
+> - 本地文件包含
+>
+> ```C
+> #include "filename"
+> ```
+>
+> 查找策略：
+>
+> 1. 先在源文件所在目录下查找，如果该头文件未找到，编译器就像查找库函数头文件一样在标 准位置查找头文件。如果找不到就提示编译错误。
+> 2. 但不要依赖双引号，双引号编译速度慢
+
+> - 库文件包含
+>
+> ```C
+> #include <filename.h>
+> ```
+
+#### 重复包含头文件
+
+> .i 后缀的预处理文件 会重复包含代码段
+
+> 很难不避免以下的情况
+
+![image-20230307150218464](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303071507211.png)
+
+> 解决办法：(以下代码只能进入一次)
+>
+> ```C
+> #ifndef __TEST_H__
+> #define __TEST_H__
+> //...
+> #endif
+> ```
+>
+> 或者：
+>
+> ```C
+> #pragma once
+> //...
+> ```
+
+### 其他预处理指令
+
+> 有需要再添加
+
+### 笔试题
+
+#### 模拟实现宏--返回偏移量
+
+> ```C
+> #include <stddef.h>
+> struct S{
+>     char c;
+>     int a;
+>     char b;
+> };
+> int main(){
+>     printf("%d\n",offsetof(struct S,c));	//0
+>     printf("%d\n",offsetof(struct S,a));	//4
+>     printf("%d\n",offsetof(struct S,b));	//8
+>     return 0;
+> }
+> ```
+>
+> 模拟实现offset
+>
+> ```struct
+> #define OFFSETOF(struct_name,member_name) (int)&(((struct_name*)0)->member_name)
+> ```
+>
+> - 地址为0到成员变量的差值就是偏移量
+> - 最后转换成整型类型
