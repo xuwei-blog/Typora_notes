@@ -93,7 +93,7 @@
 - config
   - 项目的配置文件
 
-## C#语法
+## C#常识问题
 
 ### Main方法
 
@@ -151,7 +151,7 @@
 
 
 
-### 编写问题小节
+### 编写细节
 
 - 程序语句：
 
@@ -176,3 +176,207 @@
   复杂方法前面应该使用文档注释，说明方法的功能，参数的含义，返回值信息等。
 
   文档注释一方面给我们开发者日后做参考，还有就是给调用者提供智能提示。
+
+### .NET平台
+
+![image-20230308080111867](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303080801939.png)
+
+![image-20230308080311479](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303080803513.png)
+
+![image-20230308080445008](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303080804082.png)
+
+### C#学习路线
+
+![image-20230308080654757](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303080806828.png)
+
+### 项目如何更新
+
+> 基于面向对象编程OOP，替换DLL文件
+
+### 面向对象的3大特性
+
+> - 封装：隐藏内部实现细节，模块开发者之关心内部实现，模块调用者，只关心接口适用。
+>   - 好处：安全性保障。（避免代码外漏）、快速应用、团队协作。
+> - 继承：复用技术。
+>   - 好处：一处更新，处处使用。弊端：关联会越来越复杂。
+>   - 我们自己的编写的代码，一般使用继承关系的并不多。
+> - 多态
+>   -  概念：让一个对象的接口可以根据不同的请求，做出不同的响应。
+>   -  应用：继承多态、接口多态。
+
+> OOP开发的原则：
+>
+> 1. 单一职责（对象职责明确原则）
+> 2. 开放封闭原则（开闭原则）
+> 3. 依赖倒置原则、接口隔离原则、里氏替换原则。
+
+### C#语法
+
+### 变量
+
+![image-20230308091125394](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303080911454.png)
+
+#### 变量的定义（声明）与使用
+
+> ```C#
+> namespace test1
+> {
+>     class Program
+>     {
+>         static void Main(string[] args)
+>         {
+>             //声明变量
+>             int a;
+> 
+>             //赋值
+>             a = 10;
+> 
+>             //声明的同时给赋值
+>             int b = 20;
+>         }
+>     }
+> }
+> ```
+
+#### 变量命名规范
+
+![image-20230308092337116](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303080923165.png)
+
+### 常量
+
+![image-20230308093518703](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303080935767.png)
+
+### 枚举
+
+![image-20230308093910465](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303080939534.png)
+
+> ```C#
+> namespace test1
+> {
+>     class Program
+>     {
+>         static void Main(string[] args)
+>         {
+>                 
+>         }
+>         public  enum Genders
+>         {
+>             Male,Female
+>         }
+> 
+>     }
+> }
+> ```
+
+![image-20230308152713010](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303081527068.png)
+
+### Console类
+
+![image-20230308153036156](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303081530194.png)
+
+#### 格式化输出
+
+        static void Main(string[] args)
+        {
+            string stuName = "zzhangsan";
+            int stuAge = 10;
+            Console.WriteLine("姓名：" + stuName + "年龄" +stuAge);
+            Console.WriteLine("姓名：{0} 年龄：{1}" ,stuName,stuAge);
+            Console.ReadLine();
+        }
+
+#### 制表符（数据库会用）
+
+```C#
+namespace test1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("姓名\t年龄\t班级\t");
+            Console.WriteLine("张三\t18\t21班\t");
+            Console.WriteLine("李四\t19\t22班\t");
+            Console.WriteLine("姓王五\t20\t23班\t");
+            Console.ReadLine();
+        }
+    }
+}
+
+```
+
+### 自动类型转换
+
+![image-20230308160311746](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303081603806.png)
+
+![image-20230308165548122](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303081655187.png)
+
+![image-20230308195928586](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303081959641.png)
+
+#### Parse和Convert
+
+![image-20230308200111584](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082001634.png)
+
+![image-20230308200427697](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082004746.png)
+
+### 运算符
+
+![image-20230308200722087](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082007131.png)
+
+### 分支结构
+
+#### switch和多重if的比较
+
+![image-20230308204255520](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082042569.png)
+
+### 循环结构
+
+![image-20230308205140275](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082051324.png)
+
+### 数据类型
+
+![image-20230308091229109](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303080912174.png)
+
+### 字符串处理
+
+#### IndexOf方法
+
+![image-20230308210714992](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082107029.png)
+
+#### Length属性
+
+![image-20230308210741140](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082107179.png)
+
+#### Equals方法
+
+![image-20230308210807551](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082108597.png)
+
+#### Substring方法
+
+![image-20230308212028024](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082120088.png)
+
+#### Format方法
+
+![image-20230308211732612](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082117689.png)
+
+![image-20230308231140603](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082311648.png)
+
+![image-20230308231443656](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082314715.png)
+
+![image-20230308232027247](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082320305.png)
+
+#### Trim方法
+
+![image-20230308233452114](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082334151.png)
+
+#### 转换大小写
+
+![image-20230308233513027](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082335063.png)
+
+#### 找最后一个字符串索引
+
+![image-20230308233545070](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082335107.png)
+
+#### StringBuilder类定义
+
+![image-20230308234815206](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082348280.png)
