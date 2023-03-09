@@ -1,4 +1,4 @@
-# C#
+# C#基础语法
 
 ## 概述
 
@@ -337,6 +337,12 @@ namespace test1
 
 ![image-20230308091229109](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303080912174.png)
 
+### 字符型存储
+
+![image-20230309103346903](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303091033948.png)
+
+![image-20230309103410091](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303091034215.png)
+
 ### 字符串处理
 
 #### IndexOf方法
@@ -377,6 +383,27 @@ namespace test1
 
 ![image-20230308233545070](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082335107.png)
 
+#### 字符串分离和链接
+
+![image-20230309001539770](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303090015833.png)
+
 #### StringBuilder类定义
 
 ![image-20230308234815206](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082348280.png)
+
+### 数组
+
+![image-20230308235624399](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082356457.png)
+
+![image-20230308235652048](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303082356120.png)
+
+![image-20230309095315812](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303090953892.png)
+
+### 引用类型
+
+![image-20230309095814871](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303090958911.png)
+
+### 遍历
+
+![image-20230309001024762](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303090010819.png)
+
