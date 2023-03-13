@@ -434,7 +434,9 @@ namespace test1
 显式转换是指将一个较大范围的数据类型转换为较小范围的数据类型时，或者将一个对象类型转换为另一个对象类型时，需要使用强制类型转换符号进行显示转换，强制转换会造成数据丢失。
 ```
 
+#### 拆箱和装箱
 
+![image-20230313232007647](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303132320719.png)
 
 #### 强制类型转换内置方法
 
