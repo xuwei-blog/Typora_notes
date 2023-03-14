@@ -1023,6 +1023,14 @@ Fri = 5
 
 ![image-20230313132958145](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303131329222.png)
 
+- 对象初始化器运用于集合
+
+![image-20230314105312775](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303141053829.png)
+
+#### 集合初始化器
+
+![image-20230314111840128](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202303141118208.png)
+
 ### 垃圾回收机制GC
 
 > .NET虚拟机特有机制，自动运行，并检查对象的状态
