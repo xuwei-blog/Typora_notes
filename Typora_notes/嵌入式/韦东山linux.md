@@ -276,6 +276,8 @@ chmod +x hello
 
 - 移动
 
+> 补充gg：跳到第一行
+
 ![image-20230509233549578](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305092335631.png)
 
 - 处理文档
@@ -296,4 +298,195 @@ chmod +x hello
 
 ## 嵌入式开发流程
 
+> 推荐使用linux系统编辑+编译
+>
+> windows和开发板 串口通信
+>
+> 服务器和开发板 通过NFS（也可以TFTP或者FZ）
+
 ![image-20230510000756106](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305100007181.png)
+
+### GCC编译过程
+
+![image-20230511110036211](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111100259.png)
+
+![image-20230511105944389](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111059444.png)
+
+### GCC编译内部详情
+
+> -v：查看编译详情
+
+![image-20230511114224542](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111142570.png)
+
+> cc1命令：将.c转换成.s（包括预处理和编译过程）
+>
+> as命令  ：将.s转换成.o（汇编）
+>
+> collect2：将.o组装成App（链接）
+
+### GCC常用选项
+
+![image-20230511121703146](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111217193.png)
+
+> -c：不链接
+
+![image-20230511120624212](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111206287.png)
+
+### 静态库
+
+![image-20230511122214340](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111222385.png)
+
+### 动态库
+
+![image-20230511130149691](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111301732.png)
+
+### 编译其他选项
+
+![image-20230511125952236](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111259280.png)
+
+### NFS
+
+> Net File System：网络文件系统
+
+开发板157从Ubuntu服务器的目录中拿文件
+
+> NFS使用步骤
+>
+> 1. 开权限
+> 2. 启动NFS服务
+> 3. ubuntu服务器文件 挂载到（mount） 开发板
+
+> 查看权限
+
+![image-20230510153243991](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305101532481.png)
+
+> 查看NFS服务是否开启
+
+![image-20230510153456775](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305101534810.png)
+
+> Ubuntu自己挂载自己
+
+![image-20230510153930229](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305101539291.png)
+
+### 编译设备树、内核、驱动
+
+### buildroot编译
+
+
+
+
+
+
+
+## makefile
+
+#### 规则
+
+![image-20230511145511967](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111455010.png)
+
+> 比较时间
+
+> a.o b.o如果比test文件新，则重新编译a.c  b.c 再重新链接
+
+![image-20230511144907225](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111449267.png)
+
+- 通配符
+
+![image-20230511151101660](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111511693.png)
+
+
+
+- 假想的目标文件（假想目标）
+
+![image-20230511154019837](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111540868.png)
+
+- 变量
+
+![image-20230511155632734](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111556799.png)
+
+#### makefile函数
+
+> 功能
+
+![image-20230511095828263](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305110958354.png)
+
+> 实例
+
+![image-20230511094602265](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305110946337.png)
+
+> 输出如下
+
+![image-20230511094721915](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305110947957.png)
+
+### 通用Makefile
+
+> 新手先会使用
+
+![image-20230511101623247](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305111016345.png)
+
+## 文件IO
+
+### 驱动类型
+
+- 字符驱动
+- 块驱动
+
+### 设备号
+
+> 主设备号：确定哪个驱动
+>
+> 次设备号：确定哪个硬件
+
+### 系统调用
+
+> 应用程序app通过glibc触发系统异常，从而调用内核的系统调用函数
+>
+> swi：32位arm
+>
+> svc：64位arm
+
+![image-20230524231526397](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305251534522.png)
+
+## 应用开发
+
+### frambuffer
+
+
+
+### LCD操作原理
+
+> bpp：每个像素用多少位表示颜色
+
+![image-20230524233417388](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305251534357.png)
+
+### 字符编码
+
+> ANSI 如何分辨哪些是ASCII码？
+>
+> bit7为0：是ASCII码
+>
+> bit7为1：是其他编码
+
+#### UTF16
+
+- UTF-16 LE（小字节序，权重低的在前面）
+- UTF-16 BE（大字节序）
+
+- UTF-8
+
+> BOM：带有头部
+
+![](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305251534345.png)
+
+![image-20230525153816892](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305251538967.png)
+
+![image-20230525153612338](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202305251536392.png)
+
+### freetype
+
+> 矢量字体
+
+
+
+### 输入系统
+
