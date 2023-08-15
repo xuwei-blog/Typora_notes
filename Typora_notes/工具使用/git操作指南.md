@@ -204,6 +204,14 @@ git remote add origin 远程仓库地址
 git remote rename origin origins
 ```
 
+### 修改远程仓库地址
+
+```git
+git remote set-url origin <remote-url>
+```
+
+
+
 ### 向远程推送代码
 
 向远程仓库origin 推送本地master分支
