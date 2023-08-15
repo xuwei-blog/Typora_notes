@@ -49,6 +49,8 @@
 
 ## git基本指令
 
+
+
 ### 初始化
 
 ```markdown
@@ -62,10 +64,32 @@ git add file.md		//添加某一个文件
 git add .		//添加所有未被管理的文件
 ```
 
+### 恢复为未暂存的状态
+
+```git
+git reset HEAD <name>
+```
+
 ### 添加版本
 
 ```markdown
 git commit -m "描述信息"
+```
+
+### 撤销提交远端仓库
+
+第一次提交撤销不了，后面就可以了，head~ : 倒数第一次的提交   head~2 : 倒数第二次的提交  
+
+--soft  ： 只撤销commit的操作，保留 add
+
+```git
+git reset head~ --soft
+```
+
+如果不加 --soft  ，就没有在暂存的状态
+
+```git
+git reset head~
 ```
 
 ### 查看版本状态
@@ -74,11 +98,20 @@ git commit -m "描述信息"
 git status
 ```
 
+### 查看提交文件的区别
+
+```git
+git diff
+```
+
 ### 查看版本记录（日志）
 
 ``` 
 git log		//查看几条log
 git reflog	//查看多条log
+git log --pretty  //美化一下输出
+git log --graph   //图形化展示
+git log --pretty=format:"%h , %an , %ar , %s"
 git log --graph --pretty=format:"%h %s"   //按格式查看日志
 ```
 
@@ -143,11 +176,73 @@ git branch -d 分支名
 git remote add origin 远程仓库地址
 ```
 
+### 给仓库别名重命名
+
+将远程仓库名origin  重命名为origins
+
+```git
+git remote rename origin origins
+```
+
 ### 向远程推送代码
 
+向远程仓库origin 推送本地master分支
+
 ```markdown
-git push -u origin 分支名
+git push origin master
 ```
+
+如果觉得这样推送麻烦
+
+```git
+git push -u origin master
+```
+
+往后就可以用更简洁的命令
+
+```git
+git push
+```
+
+### 提交脏文件
+
+代码写到一半，需要切换分支改bug，此时切换不了，要不就commit(不推荐)，要不就stash
+
+```git
+git stash
+```
+
+后续改完bug，恢复代码环境
+
+```git
+git stash apply
+```
+
+如果断断续续提交脏文件
+
+```git
+git stash push
+```
+
+查看脏文件记录
+
+```git
+git stash list
+```
+
+恢复之前的脏文件,最新的是stash@{0}
+
+```git
+git stash apply stash@{2}
+```
+
+删除之前的脏文件，记录序号往前顺延
+
+```git
+git stash drop stash@{2}
+```
+
+
 
 ### 克隆远程仓库
 
