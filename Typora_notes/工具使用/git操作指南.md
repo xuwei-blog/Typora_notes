@@ -92,6 +92,22 @@ git reset head~ --soft
 git reset head~
 ```
 
+### 删除远程仓库文件
+
+-r 是递归的意思，当最后面是文件夹的时候有用，单个文件不需要-r
+
+```git
+git rm -r --cached xxx.txt
+```
+
+同时删除远程和本地的文件，慎用！！！
+
+```git
+git rm xxx.txt
+```
+
+
+
 ### 查看版本状态
 
 ```markdown
@@ -167,6 +183,10 @@ git merge 分支名
 ```markdown
 git branch -d 分支名
 ```
+
+
+
+
 
 ## 多人协作指令
 
