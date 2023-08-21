@@ -161,3 +161,88 @@
 ### 变量
 
 在程序运行时，能存储计算结果或能表示值的抽象概念
+
+### 数据类型
+
+![image-20230821192758724](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202308211927872.png)
+
+- 验证字面量的数据类型
+
+![image-20230821192934439](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202308211929477.png)
+
+- 验证变量的数据类型
+
+![image-20230821193916364](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202308211939431.png)
+
+### 类型转换
+
+![image-20230821200024142](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202308212000204.png)
+
+- 所有类型都能转到str
+- 数字类型转换要考虑精度
+
+### 标识符
+
+大小写敏感，区分大小写
+
+- 标识符命名中，只允许
+  - 英文
+  - 中文（不推荐）
+  - 数字（不可以在开头）
+  - 下划线 _
+- 标识符命名中，不可使用关键字
+
+![image-20230821230643340](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202308212306399.png)
+
+- 标识符规范
+  - 变量
+    - 见名知意
+    - 多个单词组合变量名，使用下划线做分隔
+    - 英文字母全小写
+  - 类
+  - 方法
+
+
+
+### 运算符
+
+- 算术运算符
+
+![image-20230821231126316](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202308212311378.png)
+
+- 赋值运算符
+
+![image-20230821231454472](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202308212314523.png)
+
+- 复合赋值运算符
+
+![image-20230821231538600](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202308212315685.png)
+
+### 字符串扩展
+
+#### 字符串的三种定义方式
+
+1. 单引号定义法
+
+```py
+name = 'hello'
+```
+
+2. 双引号定义法
+
+```python
+name = "hello"
+```
+
+3. 三引号定义法
+
+多行注释用一个变量接收，就变成了三引号定义的字符串
+
+```py
+name = """hello"""
+```
+
+- 如何定义包含引号的字符串
+  - 单引号定义法，可与包含双引号
+  - 双引号定义法，可以包含单引号
+  - 可以用转义字符（ \ ）来解除引号效果
