@@ -11,7 +11,7 @@
 > 1. 如果需要删除远端的文件，先clone到本地后再删除，最后同步到云端，好像没有直接删除云端文件的命令
 > 2. 常用的指令
 >     - 自己建库 git init ； git add . ； git commit -m "notes" ; git push
->     - 克隆项目 git clone ； git fetch --all；
+>     - 克隆项目 git clone ； git pull；
 
 ### 交给git托管的4种状态
 
