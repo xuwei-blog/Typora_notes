@@ -378,9 +378,24 @@ git remote add origin git@github.com:vigman-xxxw/cpp-code.git
 
 ## 忽略文件
 
+git bash here ==> 创建,ignore文件 ==> 在第一行添加node_modules
+
+```bash
+touch .gitignore
 ```
-*.h     //忽略所有.h结尾的文件
-!a.h    //忽略除了a.h
-files/  //忽略文件名
+
+忽略规则
+
+```
+target          //忽略这个target目录
+angular.json    //忽略这个angular.json文件
+log/*           //忽略log下的所有文件
+css/*.css       //忽略css目录下的.css文件
+```
+
+```
+*.h     		//忽略所有.h结尾的文件
+!a.h    		//忽略除了a.h
+files/ 		 	//忽略文件名
 ```
 
