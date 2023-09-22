@@ -300,6 +300,14 @@ git fetch origin 分支名
 git merge origin/分支名
 ```
 
+### 强制将远端仓库覆盖本地
+
+```
+git reset --hard origin/master
+```
+
+
+
 ### 变基
 
 - 多个记录-->1个记录
