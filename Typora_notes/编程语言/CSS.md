@@ -303,30 +303,100 @@ h1 {
 
 
 
-- 父元素
+### 后代选择器
 
-![image-20231212151613997](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202312121516085.png)
+- 作用：选中指定元素中，符合要求的后代元素。
+- 语法：选择器1 选择器2 选择器3 ...... 选择器n {} （先写祖先，再写后代）  
+
+> 选择器之间，用空格隔开，空格可以理解为：" xxx 中的"，其实就是后代的意思。
+> 选择器 1234....n ，可以是我们之前学的任何一种选择器。
+
+> 几种关系：
+>
+> - 父元素
+>
+> - 子元素
+>
+> - 祖先元素
+>
+> - 后代元素
+>
+> - 兄弟元素
+
+  
 
 
 
-- 子元素
+> 后代选择器，可以用复合选择器组合出来
+>
+> 重点：
+>
+> 1.  .class  ：类
+> 2.  #id      ：id
+> 3.  label    ： 标签
 
-![image-20231212151728057](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202312121517293.png)
+- 举例
+
+```css
+/* 选中ul中的所有li */
+ul li {
+	color: red;
+}
+
+/* 选中ul中所有li中的a */
+ul li a {
+	color: orange;
+}
+
+/* 选中类名为subject元素中的所有li */
+.subject li {
+	color: blue;
+}
+
+/* 选中类名为subject元素中的所有类名为front-end的li */
+.subject li.front-end {
+	color: blue;
+}
+```
 
 
 
-- 祖先元素
-
-![image-20231212151928541](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202312121519608.png)
-
-
-
-- 后代元素
-
-![image-20231212152028059](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202312121520225.png)
+> notes：
+>
+> 注意：
+>
+> 1. 后代选择器，最终选择的是后代，不选中祖先。
+> 2. 儿子、孙子、重孙子，都算是后代。
+> 3. 结构一定要符合之前讲的 HTML 嵌套要求，例如：不能 p 中写 h1 ~ h6   
 
 
 
-- 兄弟元素
 
-![image-20231212152321885](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202312121523964.png)
+
+### 子代选择器
+
+- 作用：选中指定元素中，符合要求的子元素（儿子元素）。（先写父，再写子）
+- 语法：选择器1 > 选择器2 > 选择器3 > ...... 选择器n {}  
+
+> 选择器之间，用 > 隔开， > 可以理解为：" xxx 的子代"，其实就是儿子的意思。
+> 选择器 1234....n ，可以是我们之前学的任何一种选择器。  
+
+- 举例
+
+```css
+/* div中的子代a元素 */
+div>a {
+	color: red;
+} 
+/* 类名为persons的元素中的子代a元素 */
+.persons>a{
+	color: red;
+}
+```
+
+> notes：
+>
+> 注意：
+>
+> 1. 子代选择器，最终选择的是子代，不是父级。
+> 2. 子、孙子、重孙子、重重孙子 ...... 统称后代！，子就是指儿子。  
