@@ -400,3 +400,180 @@ div>a {
 >
 > 1. 子代选择器，最终选择的是子代，不是父级。
 > 2. 子、孙子、重孙子、重重孙子 ...... 统称后代！，子就是指儿子。  
+
+
+
+### 兄弟选择器
+
+> 选择兄弟器，此时123为红色
+
+```css
+    <title>兄弟选择器</title>
+    <style>
+        div+p+p {
+            color: red;
+        }
+    </style>
+
+    <div>football</div>
+    <p>nihao</p>
+    <p>123</p>
+    <p>abc</p>
+```
+
+> 只往下寻找，123为红色
+
+```css
+    <title>兄弟选择器</title>
+    <style>
+        div+p {
+            color: red;
+        }
+    </style>
+
+    
+    <p>nihao</p>
+	<div>football</div>
+    <p>123</p>
+    <p>abc</p>
+```
+
+> 相邻兄弟选择器，只能是仅仅相邻的p，h1不变红色
+
+```css
+    <title>相邻兄弟选择器</title>
+    <style>
+        div+p {
+            color: red;
+        }
+    </style>
+
+    <div>football</div>
+	<H1>HELLO></H1>
+    <p>nihao</p>
+    <p>123</p>
+    <p>abc</p>
+```
+
+> 通用兄弟选择器，选中后面所有的兄弟
+
+```css
+    <title>通用兄弟选择器</title>
+    <style>
+        div~p {
+            color: red;
+        }
+    </style>
+
+    <div>football</div>
+	<H1>HELLO></H1>
+    <p>nihao</p>
+    <p>123</p>
+    <p>abc</p>
+```
+
+
+
+### 属性选择器
+
+- 作用：选中属性值符合一定要求的元素。
+- 语法：
+
+1. [属性名] 选中==具有==某个属性的元素。
+2. [属性名="值"] 选中包含某个属性，且属性值==等于==指定值的元素。
+3. [属性名^="值"] 选中包含某个属性，且属性值以指定的值==开头==的元素。
+4. [属性名$="值"] 选中包含某个属性，且属性值以指定的值==结尾==的元素。
+5. [属性名*=“值”] 选择包含某个属性，属性值==包含==指定值的元素。  
+
+
+
+> 选择带有title属性的元素，全红
+
+```css
+    <style>
+        [title] {
+            color: red;
+        }
+    </style>
+
+    <div title="abc1">football</div>
+    <div title="abc2">ball</div>
+    <div title="abc3">foot</div>
+    <div title="abc4">bullet</div>
+```
+
+> 选择带有title = abc2 的元素，abc2红
+
+```css
+    <style>
+        [title = “abc2”] {
+            color: red;
+        }
+    </style>
+
+    <div title="abc1">football</div>
+    <div title="abc2">ball</div>
+    <div title="abc3">foot</div>
+    <div title="abc4">bullet</div>
+```
+
+> 选择带有title的值开头为a的元素，title=xxx1 不变红
+
+```css
+    <style>
+        [title^="abc"] {
+            color: red;
+        }
+    </style>
+
+    <div title="abc1">football</div>
+    <div title="abc2">ball</div>
+    <div title="abc3">foot</div>
+    <div title="abc4">bullet</div>
+    <div title="xxx1">bullet</div>
+
+```
+
+> 选择title的值以1结尾的元素，football 和 habby 变红
+
+```css
+    <style>
+        [title$="1"] {
+            color: red;
+        }
+    </style>
+    <div title="abc1"> football </div>
+    <div title="abc2"> ball </div>
+    <div title="abc3"> foot </div>
+    <div title="abc4"> bullet </div>
+    <div title="xxx1"> habby </div>
+```
+
+> 选择title的值 包含 1 的元素，football 和 habby 变红
+
+```css
+    <style>
+        [title*="1"] {
+            color: red;
+        }
+    </style>
+    <div title="abc1"> football </div>
+    <div title="abc2"> ball </div>
+    <div title="abc3"> foot </div>
+    <div title="abc4"> bullet </div>
+    <div title="xxx1"> habby </div>
+```
+
+
+
+### 伪类选择器
+
+> 作用：选中特殊状态的元素。  
+
+- 动态伪类 ()
+    - :link 超链接==未被访问==的状态。
+    - :visited 超链接==访问过==的状态。
+    - :hover 鼠标==悬停==在元素上的状态
+    - :active 元素==激活==的状态  
+- 结构伪类
+    - 
