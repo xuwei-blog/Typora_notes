@@ -181,10 +181,10 @@ docker attach [images ID]
 docker cp [images ID] [容器内路径] [主机目的路径]
 ```
 
-- 创建本地新容器
+- 创建本地新容器，改一版新的镜像放到docker images里，稍后可以用来push  （重要）
 
 ```
-docker commit -m [“commission”] -a [“author”] [images ID]
+docker commit -m="add ifconfig" -a="adv" 37ee7d4813be ubuntuifconfig:1.2
 ```
 
 - docker推送到云端
@@ -203,7 +203,7 @@ docker pull registry
 - 修改端口IP
 
 ```
-docker tag zzyyubuntu:1.2 [容器内部IP]:5000/zzyyubuntu:1.2
+docker tag zzyyubuntu:1.2 [容器内部IP]:5000/name:1.2
 ```
 
 - 推送到本地镜像仓库
@@ -212,9 +212,42 @@ docker tag zzyyubuntu:1.2 [容器内部IP]:5000/zzyyubuntu:1.2
 curl -XGET http://172.17.0.3:5000/v2/_catalog
 ```
 
-- 本地容器开启HTTP
+- 不晓得干了啥
+
+> 效果是run容器
 
 ```
+docker run -d -p 5000:5000 -v /xuwei/myregistry/:/tmp/registry --privileged=true registry
+```
+
+
+
+## 账号相关
+
+### 阿里云账号登入
+
+```
+docker login --username=喂喂喂喂喂 registry.cn-hangzhou.aliyuncs.com
+```
+
+### 目前不晓得在干啥
+
+> 效果是 docker iamges 又多增加了一条镜像
+>
+> 本地和云端的镜像一模一样，包括名称、TAG、ID
+>
+> 
+
+```
+docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/xwdinguagua/testdemo:[镜像版本号]
+```
+
+### 从本地推送到云端仓库
+
+> 放到云端之后会被压缩，但pull回来依旧是原来的体积
+
+```
+docker push registry.cn-hangzhou.aliyuncs.com/xwdinguagua/testdemo:[镜像版本号]
 ```
 
 
