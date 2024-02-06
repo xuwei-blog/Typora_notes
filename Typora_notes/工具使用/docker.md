@@ -208,6 +208,13 @@ docker tag zzyyubuntu:1.2 [容器内部IP]:5000/name:1.2
 
 - 推送到本地镜像仓库
 
+    - 实测有报错，应该是防火墙问题，还未解决
+
+        ![image-20240204114001753](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402041140933.png)
+
+        ![image-20240204114311958](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402041143055.png)
+
+
 ```
 curl -XGET http://172.17.0.3:5000/v2/_catalog
 ```
