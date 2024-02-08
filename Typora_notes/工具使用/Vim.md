@@ -3,6 +3,8 @@
 [TOC]
 
 > 课程来源:[2-2 Vim，为什么你有这么多模式_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1NG4y1p74h/?p=3&spm_id_from=pageDriver&vd_source=91ddf1aeb53bd3336e78168da8d0b7dd)
+>
+> vim的插件、如何配置映射，有需要再学
 
 ## 简介
 
@@ -97,10 +99,10 @@
 
     
 
-### 修改命令，常用caw
+### 修改命令，常用caw，重要
 
 - r：replace
-- c：change     （  ct”，删除到“  ） （cw  、caw，修改单词）
+- c：change     （  ct”，删除到“  ） （cw  、caw，修改单词） (ci”，删掉“内的)
 - s：substitute   （ 4s  ）
 
 ### 撤销
@@ -127,6 +129,38 @@
 :1,6 S/pro/cur/g  # 1~6行，pro替换成cur ，全局
 ```
 
+- 正则表达式案例
+
+```
+:% S/\<pro\>cur/g
+```
+
+
+
+### 多文件操作
+
+![image-20240207135711918](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402071357997.png)
+
+![image-20240207135746405](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402071357638.png)
+
+![image-20240207135529915](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402071355155.png)
+
+
+
+### 复制粘贴
+
+- dd：删除一行
+- p：粘贴
+- y：复制
+- ”+p ：外部粘贴进vim，且保留格式
+
+
+
+### 宏
+
+- q：开启/结束录制    （qa，开始录制，记录在a寄存器）
+- @a:    应用 a寄存器的操作
+
 
 
 ## 输入模式基操
@@ -145,6 +179,10 @@
 ### 快速切换 normal模式~insert模式
 
 - gi：快速切换到最后一次编辑的位置，并进行编辑
+
+
+
+
 
 ## 命令模式基操
 

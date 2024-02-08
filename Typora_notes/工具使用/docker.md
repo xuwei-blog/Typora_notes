@@ -200,32 +200,113 @@ docker tag [images ID] [阿里云镜像仓库地址]:[TAG]
 docker pull registry
 ```
 
-- 修改端口IP
+- 修改镜像，使其复合上传要求
 
 ```
-docker tag zzyyubuntu:1.2 [容器内部IP]:5000/name:1.2
+docker tag ubuntuifconfig:1.3 0.0.0.0:5000/myulocal:1.3
 ```
 
 - 推送到本地镜像仓库
 
     - 实测有报错，应该是防火墙问题，还未解决
 
-        ![image-20240204114001753](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402041140933.png)
+    - 报错解决，私服库IP就是docker ps显示的
 
+    - push之前要tag新格式
+    
+        ![image-20240204114001753](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402041140933.png)
+    
         ![image-20240204114311958](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402041143055.png)
 
 
 ```
-curl -XGET http://172.17.0.3:5000/v2/_catalog
+curl -XGET http://0.0.0.0:5000/v2/_catalog
 ```
 
 - 不晓得干了啥
 
 > 效果是run容器
+>
+> 把registry容器打开，为了将镜像上传到本地私服库
 
 ```
 docker run -d -p 5000:5000 -v /xuwei/myregistry/:/tmp/registry --privileged=true registry
 ```
+
+- 上传镜像到本地私服库
+
+```
+docker push 0.0.0.0:5000/myulocal:1.4
+```
+
+- 让docker采用https
+
+```
+root@ubuntu:/# docker push 0.0.0.0:5000/myulocal:1.3
+The push refers to repository [0.0.0.0:5000/myulocal]
+Get "https://0.0.0.0:5000/v2/": http: server gave HTTP response to HTTPS client
+```
+
+> 添加一行json，刷新重启服务，看下registry有没有打开
+>
+> systemctl daemon-reload
+>
+> systemctl restart docker.service
+
+```
+"insecure-registries": ["0.0.0.0:5000"]   #私服库IP：端口
+```
+
+> 效果展示，push成功
+>
+> 可以看出镜像是一层套一层的，镜像的分层结构
+
+```
+root@ubuntu:/# docker push 0.0.0.0:5000/myulocal:1.3
+The push refers to repository [0.0.0.0:5000/myulocal]
+e806ade82d1c: Pushed 
+9f54eef41275: Pushed 
+1.3: digest: sha256:f3a011c40b93ae2c50ebea50ee8fde91282745dd0b41b14242f16c12bafffe98 size: 741
+```
+
+- 验证一下有没有上传成功
+
+```
+root@ubuntu:/# curl -XGET http://0.0.0.0:5000/v2/_catalog
+{"repositories":["myulocal"]}
+```
+
+- 拉取私服库镜像
+
+```
+docker pull 0.0.0.0:5000/myulocal:1.3
+```
+
+
+
+- 查看数据卷是否挂载成功
+
+```
+docker inspect [images id]
+```
+
+> 挂载情况
+
+```
+"Mounts": [
+    {
+        "Type": "bind",
+        "Source": "/tmp/docker_host_data",
+        "Destination": "/tmp/docker_data",
+        "Mode": "",
+        "RW": true,
+        "Propagation": "rprivate"
+    }
+```
+
+
+
+
 
 
 
@@ -243,7 +324,6 @@ docker login --username=喂喂喂喂喂 registry.cn-hangzhou.aliyuncs.com
 >
 > 本地和云端的镜像一模一样，包括名称、TAG、ID
 >
-> 
 
 ```
 docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/xwdinguagua/testdemo:[镜像版本号]
