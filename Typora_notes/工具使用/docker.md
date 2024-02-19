@@ -2,7 +2,7 @@
 
 [TOC]
 
-
+> b站尚硅谷 阳哥
 
 ## 概述
 
@@ -247,6 +247,8 @@ The push refers to repository [0.0.0.0:5000/myulocal]
 Get "https://0.0.0.0:5000/v2/": http: server gave HTTP response to HTTPS client
 ```
 
+> vim /etc/docker/daemon.json
+>
 > 添加一行json，刷新重启服务，看下registry有没有打开
 >
 > systemctl daemon-reload
@@ -306,10 +308,6 @@ docker inspect [images id]
 
 
 
-
-
-
-
 ## 账号相关
 
 ### 阿里云账号登入
@@ -318,7 +316,7 @@ docker inspect [images id]
 docker login --username=喂喂喂喂喂 registry.cn-hangzhou.aliyuncs.com
 ```
 
-### 目前不晓得在干啥
+### 复制镜像并改名
 
 > 效果是 docker iamges 又多增加了一条镜像
 >
@@ -339,7 +337,191 @@ docker push registry.cn-hangzhou.aliyuncs.com/xwdinguagua/testdemo:[镜像版本
 
 
 
-## docker file
+## 集群
+
+> 1. 集群的Hash槽有区间，单机命令放在集群上可能不适用
+> 2. 主从机切换，主机宕机自动切到从机，把主机修好启动，再重启从机，又能回到主机
+>
+> 
+
+- 查看主从信息
+
+> 查看主从信息
+
+```
+redis-cli --cluster check 192.168.111.167:6381
+```
+
+- 集群洗牌，重新分配Hash槽
+
+> 新的哈希槽容量 = 16384 / 新的master数量
+>
+> 每个旧主机给新主机匀了一些空间
+
+```
+redis-cli --cluster reshared 192.168.111.167:6381
+```
+
+- 添加主机的从机，扩容
+
+```
+太长了，用得到再找，关键词 add-node
+```
+
+- 删除主从机，缩容
+
+> 先删除从机 del-node，把槽号分配给其他node，再删除主机
+
+![image-20240218104429934](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402181044131.png)
+
+
+
+## Dockerfile
+
+> 按照Dockerfile的命令，将老镜像生成新的镜像
+
+### 保留字
+
+- 需要再学
+
+### 构建镜像
+
+> 把想要的操作加进Dockerfile
+>
+> TAG后面     有个空格，有个点
+
+```
+docker build -t centosjava8:1.5 .
+```
+
+- 虚悬镜像的构建
+
+> 虚悬镜像没用处，白白占着空间，可以删除
+
+![image-20240218165945142](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402181659209.png)
+
+- 查找虚悬镜像
+
+```
+docker image ls -f dangling=true
+```
+
+
+
+- 删除虚悬镜像
+
+```
+docker image prune
+```
+
+
+
+## docker network
+
+### 查看网络
+
+```
+docker network ls
+```
+
+### 查看网络帮助
+
+```
+docker network --help
+```
+
+### 查看网络具体信息
+
+```
+docker network inspect XXX（具体的网络name）
+```
+
+### 删除网络
+
+```
+docker network rm XXX（具体的网络name）
+```
+
+### bridge
+
+> 容器会用一个独立的network namespace，容器虚拟出网卡
+
+
+
+### 默认网桥docker0
+
+> docker服务给宿主机提供了默认网桥docker0，用于容器与容器，容器与宿主机之间的通讯
+
+- docker服务启动后打开网桥docker0
+
+```
+docker network ls
+docker network inspect bridge    #此时可以看到已开启默认网桥
+```
+
+
+
+![image-20240219134144200](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402191341512.png)
+
+
+
+### host
+
+> 1. 容器不会获得独立的network namespace ，与主机公用一个network namespace，容器将不会虚拟出自己的网卡，而是使用宿主机的IP和端口
+> 2. 当--network=host或者-net=host时，在host模式下，如果指定了-p端口映射，-p设置的参数不会有作用，端口号会以主机端口号为主，重复时递增
+> 3. 解决办法就是用bridge模式
+
+- 语法
+
+```
+#有警告的写法
+docker run -d -p 8081:8080 --network host --name u1 image1
+#正确写法,别写-p
+docker run -d              --network host --name u1 image1
+```
+
+
+
+### network none模式
+
+> 只有1个本地   lo  网络 
+
+
+
+### container网络模式
+
+> 借用其他容器的网络，但文件系统、进程列表还是隔离的
+
+![image-20240219145349327](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402191453432.png)
+
+
+
+- 端口冲突案例
+
+```
+## app85是默认网桥，app86容器借用app85的网络配置，会造成端口冲突
+docker run -d -p 8085:8080                           --name app85 image
+docker run -d -p 8086:8080 --network container:app85 --name app86 image
+
+## 假设没有冲突，关闭app85，app86的网络也会消失
+```
+
+
+
+## 自定义网络模式
+
+> 1. 在同一个网段下，ping IP可以，但不能ping 服务名
+> 2. 需要用到自定义网络，启动容器并加入自定义网络，就可以通过服务名互通
+
+- 语法
+
+```
+docker run -d -p 8081:8080 --network xw_network --name app81 image
+docker run -d -p 8082:8080 --network xw_network --name app82 image
+
+## 进入容器互动终端，可以通过服务名ping通
+root@app81：/pwd # ping app82   
+```
 
 
 
@@ -347,7 +529,19 @@ docker push registry.cn-hangzhou.aliyuncs.com/xwdinguagua/testdemo:[镜像版本
 
 
 
+
+
+
+
+
+
 ## 案例
+
+
+
+
+
+
 
 
 
