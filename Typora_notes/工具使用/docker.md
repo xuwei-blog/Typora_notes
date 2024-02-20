@@ -511,7 +511,7 @@ docker run -d -p 8086:8080 --network container:app85 --name app86 image
 ## 自定义网络模式
 
 > 1. 在同一个网段下，ping IP可以，但不能ping 服务名
-> 2. 需要用到自定义网络，启动容器并加入自定义网络，就可以通过服务名互通
+> 2. 启动容器并加入自定义网络，就可以通过服务名互通
 
 - 语法
 
@@ -527,23 +527,190 @@ root@app81：/pwd # ping app82
 
 ## docker compose
 
+> 需要定义一个docker-compose.yml，写好多个容器之间的调用关系，只需要一个命令，就能同时启动/关闭这些容器
+
+### 下载安装
+
+> 看官网docker doc
+
+### docker compose概念
+
+> 两个要素
+>
+> 1. 一个文件
+>     - docker-compose.yml
+> 2. 两要素
+>     - 服务service：容器实例
+>     - 工程project：在文件中定义一个完整的业务单元
+
+> docker-compose up   等价于  一次性执行了多个docker run
+
+### compose常用命令
+
+> 操作流程
+>
+> 1. yml文件粘过来，docker-compose config -q 检查一下语法
+> 2. 一键启动 docker-compose up
+> 3. 一键停止 docker-compose stop
+
+```docker
+docker-compose -h                  # 查看帮助
+docker-compose up				   # 启动所有docker-compose服务
+docker-compose up -d   			   # 启动所有docker-compose服务并后台运行
+docker-compose down				   # 停止并删除容器、网络、卷、镜像
+
+docker-compose exec [yml的服务ID]   # 进入容器实例
+docker-compose ps					# 展示当前docker-compose编排过的运行的所有容器
+docker-compose top					# 展示当前docker—compose编排过的容器进程
+docker-compose logs [yml的服务ID]	 # 查看容器输出日志
+
+docker-compose config				# 检查配置
+docker-compose config -q			# 检查配置，有问题才有输出
+docker-compose restart				# 重启服务
+docker-compose start				# 启动服务
+docker-compose stop					# 停止服务
+```
 
 
 
+### docker-compose.yml文件模板
+
+```yaml
+# Compose用3以后的版本，官网可以看到 docke-compose 和 docker engine 对应关系
+version: "3"
+
+# 定义服务
+services:
+
+  # 为project定义服务
+  redis:
+    # 服务的镜像名称或镜像ID。如果镜像在本地不存在，Compose将会尝试拉取镜像
+    image: redis:4.0
+    # 配置端口 - "宿主机端口:容器暴露端口"
+    ports:
+      - 6379:6379
+      
+    # 指定一个自定义容器名称，而不是生成的默认名称，相当于docker run ... --name redis4
+    container_name: redis4
+
+    # 配置容器连接的网络,相当于docker network create network_name
+    networks:
+      network_name:
+       # 为单redis创建别名, REDIS_URL标记为redis服务的地址. (不配置aliases也可以, 这样就通过定义的服务名: redis链接)
+       aliases:
+         - REDIS_URL
+    # 挂载
+    volumes:
+      - "/docker/redis/conf/redis.conf:/etc/redis/redis.conf"
+      - "/docker/redis/data:/data"
+    # 容器总是重新启动
+    restart: always
+    # 相当于执行一些命令
+    command:
+      redis-server /etc/redis/redis.conf --appendonly yes
+    # 使用该参数，container内的root拥有真正的root权限。
+    privileged: true
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+      
+    # 添加环境变量
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      MYSQL_ALLOW_EMPTY_PASSOWRD:'nO'
+      MYSQL_DATABASE:'mysql'
+      MYSQL_USER:'adv'
+      MYSQL_PASSWORD:'123456'
+      
+    volumes:
+      - "/docker/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf"
+      - "/docker/mysql/logs:/var/log/mysql"
+      - "/docker/mysql/data:/var/lib/mysql"
+      - "/docker/mysql/sql/init.sql:/docker-entrypoint-initdb.d/init.sql"
+      - "/etc/localtime:/etc/localtime"
+    networks:
+      network_name:
+        aliases:
+         - MYSQL_URL
+    restart: always
+    command: --init-file /docker-entrypoint-initdb.d/init.sql
+    container_name: mysql
+    privileged: true
+    
+  project-name:
+    # 服务的镜像名称或镜像ID。如果镜像在本地不存在，Compose将会尝试拉取镜像
+    image: project-name:1.0.0
+    # 构建镜像
+    build:
+      # 指定项目的地址
+      context: /root/docker_mysql_redis
+      # 指定Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    # 从文件添加环境变量
+    env_file:
+      - /root/environment.env
+    networks:
+      network_name:
+       aliases:
+        - PROJECT_URL
+    privileged: true
+    restart: always
+    container_name: test-name
+    
+  # ........可以继续添加
+
+
+networks:
+  # bridge：默认，需要单独配置ports映射主机port和服务的port，并且开启了容器间通信
+  network_name:
+    driver: bridge
+```
 
 
 
+## 可视化工具portainer
+
+> docker可视化，图形化操作
+>
+> 底层就是将 docker system df  图形化 ，可以用vue开发
+
+### 下载
+
+> 映射两个端口
+>
+> --restart=always   ，容器实例跟随docker的重启而重启
+
+```docker
+docker run -d -p 8000:8000 -p 9000:9000 -name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+```
 
 
-## 案例
+
+## 容器监控CIG 
+
+### 监控docker
+
+> 小公司一个命令够用了，大公司需要监控预警就不够用
+
+```
+docker stats
+```
+
+### CIG
+
+> - CAdvisor    监控收集
+>     - 默认存储2分钟数据，所以需要将数据存起来
+> - InfluxDB     存储数据
+>     - 为了持久化存储，是一个数据库
+> - Granfana    展示图表
+>     - 数据监控分析可视化平台，支持InfluxDB、MySQL、Elaticsearch、OpenTSDB、Graphite
 
 
 
+## K8S
 
-
-
-
-
-
-## 可视化工具
-
+> 管理大规模容器才需要K8S
