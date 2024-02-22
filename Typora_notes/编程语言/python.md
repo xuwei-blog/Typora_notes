@@ -45,30 +45,63 @@
 
   
 
-### 程序格式框架
 
-#### 缩进
+
+### 缩进
 
 - 严格明确：缩进是语法的一部分
 - 所属关系：表达代码间层次关系
 - 长度一致：4个空格 或 1个tab
 
-#### 注释
+### 注释
 
 ```python
-#单行注释 
+#	单行注释 
 
 '''
-多行注释
-第二行注释
+     单引号
+     多行注释
 '''
+
+"""
+	双引号
+	多行注释
+"""
 ```
 
-#### 变量
+### 变量
 
 用来保存和表示数据的占位符号
 
-#### 命名
+## 变量类型
+
+​	![image-20240222225343876](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202402222253010.png)
+
+
+
+> 测试类型
+
+```
+price = 100
+type(price)
+
+==>
+<class 'int'>
+```
+
+> 判断类型
+
+```
+price = 100
+isinstance(price,int)
+
+==>
+True
+```
+
+
+
+### 命名
 
 变量采用标识符来表示，==关联标识符==的过程叫命名
 
@@ -82,7 +115,44 @@
 
 - 保留字
 
+```
+import keyword
+keyword,kwlist
+
+==>
+[关键字列表]
+```
+
 ![image-20230103152204438](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/image-20230103152204438.png)
+
+
+
+## 输出函数print
+
+> 语法
+
+```python
+print(*objects, sep=' ',end='\n',file=sys.stdout,flush=False)
+```
+
+> 案例
+
+```
+# 将默认的空格分隔符换成 ,
+print('hello','world',sep=',')
+
+# 将默认的换行符换成 ,
+print('hello','world',end=',')
+
+# 输出到文件
+file_source = open('test.txt','W')
+print('hello','world',file=ile_source)
+file_source.close()
+```
+
+
+
+
 
 #### 数据类型
 
