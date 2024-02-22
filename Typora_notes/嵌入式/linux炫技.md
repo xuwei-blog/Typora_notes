@@ -317,7 +317,7 @@ du -h /dir
 
     ```
     apt-get install tree
-    tree	# 从当前目录开始，展示
+    tree	# 从当前目录开始，展示所有内容
     ```
 
     
