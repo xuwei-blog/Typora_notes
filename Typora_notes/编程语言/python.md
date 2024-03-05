@@ -152,6 +152,109 @@ file_source.close()
 
 
 
+## 输出函数input
+
+> 语法
+
+```python
+price = input(' price = ')
+number = input(' number = ')
+# 下面这句会报错，因为input默认输入的是str类型
+print(' all need = ', price * number)
+
+# 修改方法
+print(' all need = ', int(price) * int(number) )
+```
+
+
+
+## 运算符
+
+### 简单运算符
+
+> 简单运算符：
+>
+> - 加法
+>
+>   ```python
+>   num1 = 1314
+>   num2 = 520
+>   print(num1 + num2)	# 打印 1314520
+>   ```
+>
+>   
+>
+> - 乘法
+>
+>   ```python
+>   pirnt('=' * 5)	# 打印 5个=
+>   ```
+>
+>   
+>
+> - 除法
+>
+>   ```python
+>   a = 10
+>   b = 0
+>   pirnt(a / b)	# 除数不能为0
+>   ```
+>
+>   
+>
+> - 向下取整
+>
+>   ```python
+>   a = 10
+>   b =3
+>   print(a / b)	# 打印 3.333
+>   print(a // b)	# 打印 3
+>   ```
+>
+>   
+>
+> - 余数
+>
+>   ```python
+>   print(10/3)	# 3.333
+>   print(10%3)	# 1
+>   
+>   print(3/10) # 0.3
+>   print(3%10) # 3
+>   
+>   print(-10%3) # r = -10 - 3 * (-10 // 3) = 2
+>   ```
+>
+>   
+>
+> - 赋值
+>
+>   ```python
+>   a, b = 5 , 10
+>   print(a, b) # 5 10
+>   
+>   # a,b 快速交换
+>   a, b = b, a 
+>   ```
+
+### 比较运算符
+
+> 注意 False 、 True 首字母大写
+
+### 逻辑运算符
+
+```python
+print(1 and 0)				# 打印 0
+print(1 and 0 and 'abc')	# 打印 0 ，哪里False就输出哪里
+print(1 and 0.0 and 'abc')	# 打印0.0，哪里False就输出哪里
+
+print(0 or 100)				# 打印100,哪里True就输出哪里
+print(9 or 10 or 100)		# 打印9,哪里True就输出哪里
+print(0 or '' or 100)		# 打印100
+
+# or 高端操作，可以用来简化 if else的判断逻辑
+```
+
 
 
 #### 数据类型
