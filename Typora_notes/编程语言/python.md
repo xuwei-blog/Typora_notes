@@ -218,10 +218,10 @@ print(' all need = ', int(price) * int(number) )
 >   ```python
 >   print(10/3)	# 3.333
 >   print(10%3)	# 1
->   
+>     
 >   print(3/10) # 0.3
 >   print(3%10) # 3
->   
+>     
 >   print(-10%3) # r = -10 - 3 * (-10 // 3) = 2
 >   ```
 >
@@ -232,7 +232,7 @@ print(' all need = ', int(price) * int(number) )
 >   ```python
 >   a, b = 5 , 10
 >   print(a, b) # 5 10
->   
+>     
 >   # a,b 快速交换
 >   a, b = b, a 
 >   ```
@@ -254,6 +254,30 @@ print(0 or '' or 100)		# 打印100
 
 # or 高端操作，可以用来简化 if else的判断逻辑
 ```
+
+
+
+## 流程控制结构
+
+> 1. 顺序
+>
+> 2. 条件
+>
+>    ```python
+>    grade = False
+>    if grade:
+>        print('pass')
+>    else:
+>        print('not pass')
+>    ```
+>
+>    
+>
+> 3. 循环
+
+
+
+!!! 看到P38
 
 
 
