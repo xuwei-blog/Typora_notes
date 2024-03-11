@@ -2,7 +2,138 @@
 
 [TOC]
 
-> b站尚硅谷 阳哥
+> b站尚硅谷 阳哥 、黑马
+>
+> 主要参考心得
+
+## 心得
+
+### 常用命令
+
+![image-20240311153203725](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202403111532581.png)
+
+
+
+### 导出tar包
+
+> 可以将镜像分享出来
+
+```
+docker save -o [image].tar [image]:[latest]
+```
+
+> 加载tar包
+
+```docker
+docker load -i [image].tar
+```
+
+### 按格式查看镜像
+
+> 查看运行中的容器
+
+```docker
+docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}\t{{.Names}}"
+```
+
+> 参数-a  ，查看所有容器，包括 运行中、停止的
+
+```docker
+docker ps -a --format "table {{.ID}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}\t{{.Names}}" -a
+```
+
+### 查看日志
+
+> 查看日志
+
+```docker
+docker logs image
+```
+
+> 持续查看日志
+
+```docker
+docker logs -f image
+```
+
+### 容器交互
+
+```docker
+docker exec -it image bash
+```
+
+### 删除容器
+
+> 两种方法
+>
+> ```docker
+> docker stop [container_name]
+> docker rmi [container_name]
+> ```
+>
+> ```docker
+> docker rmi [container_name] -f
+> ```
+
+### 数据卷
+
+![image-20240311171055325](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202403111710503.png)
+
+### 数据卷命令
+
+| **命令**              | **说明**             |
+| :-------------------- | :------------------- |
+| docker volume create  | 创建数据卷           |
+| docker volume ls      | 查看所有数据卷       |
+| docker volume rm      | 删除指定数据卷       |
+| docker volume inspect | 查看某个数据卷的详情 |
+| docker volume prune   | 清除数据卷           |
+
+### 查看容器详情
+
+> 可以查看挂载路径source destination
+
+```docker
+docker inspect [container_id]
+```
+
+### 如何挂载容器的数据
+
+> 区分挂载到 目录 还是 数据卷
+>
+> 挂载config和启动脚本需要查阅文档
+
+![image-20240311184959076](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202403111849151.png)
+
+```docker
+docker run -d \
+  --name mysql \
+  -p 3306:3306 \
+  -e TZ=Asia/Shanghai \
+  -e MYSQL_ROOT_PASSWORD=123 \
+  -v ./mysql/data:/var/lib/mysql \
+  -v ./mysql/conf:/etc/mysql/conf.d \
+  -v ./mysql/init:/docker-entrypoint-initdb.d \
+  mysql
+```
+
+### 镜像结构
+
+![image-20240311193245656](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202403111932741.png)
+
+### dockerfile
+
+| **FROM**       | 指定基础镜像                                 | `FROM centos:6`              |
+| -------------- | -------------------------------------------- | ---------------------------- |
+| **ENV**        | 设置环境变量，可在后面指令使用               | `ENV key value`              |
+| **COPY**       | 拷贝本地文件到镜像的指定目录                 | `COPY ./xx.jar /tmp/app.jar` |
+| **RUN**        | 执行Linux的shell命令，一般是安装过程的命令   | `RUN yum install gcc`        |
+| **EXPOSE**     | 指定容器运行时监听的端口，是给镜像使用者看的 | EXPOSE 8080                  |
+| **ENTRYPOINT** | 镜像中应用的启动命令，容器运行时调用         | ENTRYPOINT java -jar xx.jar  |
+
+
+
+
 
 ## 概述
 
