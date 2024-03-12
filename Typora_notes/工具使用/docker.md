@@ -68,11 +68,11 @@ docker exec -it image bash
 >
 > ```docker
 > docker stop [container_name]
-> docker rmi [container_name]
+> docker rm [container_name]
 > ```
 >
 > ```docker
-> docker rmi [container_name] -f
+> docker rm [container_name] -f
 > ```
 
 ### 数据卷
@@ -121,7 +121,9 @@ docker run -d \
 
 ![image-20240311193245656](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202403111932741.png)
 
-### dockerfile
+
+
+### Dockerfile
 
 | **FROM**       | 指定基础镜像                                 | `FROM centos:6`              |
 | -------------- | -------------------------------------------- | ---------------------------- |
@@ -130,6 +132,98 @@ docker run -d \
 | **RUN**        | 执行Linux的shell命令，一般是安装过程的命令   | `RUN yum install gcc`        |
 | **EXPOSE**     | 指定容器运行时监听的端口，是给镜像使用者看的 | EXPOSE 8080                  |
 | **ENTRYPOINT** | 镜像中应用的启动命令，容器运行时调用         | ENTRYPOINT java -jar xx.jar  |
+
+> 构建镜像
+>
+> 细节：
+>
+> - -t：给镜像起名，格式repository:tag  ， 不指定tag时，默认位latest
+> - .  ：指定Dockerfile所在目录，如果在当前目录，则指定为`.`
+
+```
+docker build -t myImage:1.0 .
+```
+
+
+
+### 网络
+
+| **命令**                  | **说明**                 |
+| :------------------------ | :----------------------- |
+| docker network create     | 创建一个网络             |
+| docker network ls         | 查看所有网络             |
+| docker network rm         | 删除指定网络             |
+| docker network prune      | 清除未使用的网络         |
+| docker network connect    | 使指定容器连接加入某网络 |
+| docker network disconnect | 使指定容器连接离开某网络 |
+| docker network inspect    | 查看网络详细信息         |
+
+> 容器一创建就连进自定义网络
+
+```docker
+docker run -d --name jellyfin-8096 -p 8096:8096 --network personal_network jellyfin_image
+```
+
+
+
+### docker-compose
+
+> 功能一样，只是语法不同
+
+![image-20240312111538313](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202403121115443.png)
+
+> 示例代码
+
+```yaml
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: 123
+    volumes:
+      - "./mysql/conf:/etc/mysql/conf.d"
+      - "./mysql/data:/var/lib/mysql"
+      - "./mysql/init:/docker-entrypoint-initdb.d"
+    networks:
+      - hm-net
+  hmall:
+    build: 										# 也可以使用build构建镜像
+      context: .
+      dockerfile: Dockerfile					# 指定镜像名字
+    container_name: hmall
+    ports:
+      - "8080:8080"
+    networks:									# 创建容器时，加入hm-net的docker network
+      - hm-net
+    depends_on:									# 依赖关系，先创建mysql容器，再创建hmall
+      - mysql
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:										# 两个端口，一个是用户端口，一个是管理端口
+      - "18080:18080"
+      - "18081:18081"
+    volumes:
+      - "./nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - "./nginx/html:/usr/share/nginx/html"
+    depends_on:
+      - hmall
+    networks:			
+      - hm-net									# 加入同一个网络标记称号
+networks:										# 如果没有hm-net，则创建hm-net
+  hm-net:										# 网络标记称号，没有实测，应该只体现在yaml中
+    name: hmall									# 网络名字，docker network ls中的name
+```
+
+```
+docker run -d -p 9000:9000 --name=portainer-9000 --network="host" --restart=always -v ./config:/var/run/docker.sock -v ./portainer_data:/data portainer/portainer-ce
+```
 
 
 

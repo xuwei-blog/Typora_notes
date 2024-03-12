@@ -181,8 +181,26 @@ service cornd restart #重启任务调度
 >     # crontab -l         ==》   no crontab for root
 >     # crontab cron-backup.txt
 >     ```
->
-> 3. 123
+
+
+
+## 定时任务at
+
+> 检查atd守护进程有没有启动，本条命令也有相关进程
+
+```shell
+ps -ef | grep atd
+```
+
+> 相关指令
+
+| 指令 | 作用                                           |
+| ---- | ---------------------------------------------- |
+| atq  | 查询任务队列，q：quest，探求                   |
+| at   | 设置定时时间，进入后    ctrl+（space  、 del） |
+| atrm | 删除编号为6的定时任务，atrm 6                  |
+|      |                                                |
+|      |                                                |
 
 
 
@@ -280,7 +298,7 @@ service cornd restart #重启任务调度
 >
 >     ```
 >     vim /etc/fstab
->             
+>                 
 >     # 编辑完之后
 >     mount -a 	# 自动挂载，使得永久挂载的设置生效
 >     ```
