@@ -186,6 +186,15 @@ service cornd restart #重启任务调度
 
 ## 定时任务at
 
+> 基本介绍
+>
+> - at命令是一次性定时计划任务，at的守护进程atd会以后台模式运行，检查作业队列来运行
+> - 默认情况下，atd守护进程每60秒检查作业队列，有作业时，会检查作业运行时间，如果时间与当前时间匹配，则运行此作业
+> - at时一次性定时计划任务，只执行一次
+> - at命令使用前，要保证atd进程的启动
+
+![image-20240313103405084](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202403131034141.png)
+
 > 检查atd守护进程有没有启动，本条命令也有相关进程
 
 ```shell
@@ -194,15 +203,23 @@ ps -ef | grep atd
 
 > 相关指令
 
-| 指令 | 作用                                           |
-| ---- | ---------------------------------------------- |
-| atq  | 查询任务队列，q：quest，探求                   |
-| at   | 设置定时时间，进入后    ctrl+（space  、 del） |
-| atrm | 删除编号为6的定时任务，atrm 6                  |
-|      |                                                |
-|      |                                                |
+| 指令 | 作用                                                         |
+| ---- | ------------------------------------------------------------ |
+| atq  | 查询任务队列，q：quest，探求                                 |
+| at   | 设置定时时间，进入后    ctrl+（space  、 del），ctrl+d ：结束at命令的输入 |
+| atrm | 删除编号为6的定时任务，atrm 6                                |
+|      |                                                              |
+|      |                                                              |
+
+![image-20240313103934745](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202403131039802.png)
 
 
+
+![image-20240313104048970](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202403131040101.png)
+
+### at案例
+
+![image-20240313104154265](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202403131041364.png)
 
 ## 分区
 
@@ -291,14 +308,14 @@ ps -ef | grep atd
 >     mount /dev/sdb1 /home/newdisk	# 这是临时挂载
 >     
 >     # 如何取消挂载呢
->     umount /dev/sdb1 /home/newdisk
+>     umount /dev/sdb1 或者 /home/newdisk
 >     ```
 >
 > 5. 设置永久挂载
 >
 >     ```
 >     vim /etc/fstab
->                 
+>                     
 >     # 编辑完之后
 >     mount -a 	# 自动挂载，使得永久挂载的设置生效
 >     ```
@@ -349,7 +366,7 @@ du -h /dir
 
     > 以 `-` 开头的不是目录文件
     >
-    > 先列出来，再过滤，再统计
+    > 先列出来，再过滤(正则表达式)，再统计
 
     ```
     ls -l /home | grep "^-" | wc -l
