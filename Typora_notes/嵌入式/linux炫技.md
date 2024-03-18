@@ -315,7 +315,7 @@ ps -ef | grep atd
 >
 >     ```
 >     vim /etc/fstab
->                     
+>                         
 >     # 编辑完之后
 >     mount -a 	# 自动挂载，使得永久挂载的设置生效
 >     ```
@@ -415,6 +415,14 @@ du -h /dir
 
 
 
+### 主机号和hosts映射
+
+> 黑客篡改hosts映射，实现DNS劫持，将网站映射到盗号IP页面
+
+> linux，hosts目录位置 /etc/hosts
+>
+> windows，hosts目录位置 C：windows  \ system32 \ drivers \ etc \ hosts
+
 ### IP地址和子网掩码
 
 > 用于判断IP地址的网络号和主机号。
@@ -434,3 +442,11 @@ ping 127.0.0.1
 ```
 
 > ping本机的IP地址，用IPConfig查看本机IP，然后Ping该IP，通则表明网络适配器（网卡或MODEM）工作正常，不通则是网络适配器出现故障
+
+
+
+## 进程管理
+
+> LINUX中，每一个执行的 `程序` 被称为一个进程，会分配一个ID号（PID）
+>
+> 每个进程以两种方式存在，前台 和 后台
