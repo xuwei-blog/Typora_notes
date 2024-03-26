@@ -13,6 +13,21 @@
 >     - 自己建库 git init ； git add . ； git commit -m "notes" ; git push
 >     - 克隆项目 git clone ； git pull；
 
+> git初始化：
+>
+> 1. ```shell
+>    git config --global  user.name "这里换上你的用户名"
+>    git config --global user.email "这里换上你的邮箱"
+>    ```
+>
+> 2. ```shell
+>    ssh-keygen -t rsa -C "这里换上你的邮箱"
+>    ```
+>
+> 3. 将  `.pub`  后缀的公钥添加到github
+>
+> 4. 后续可以用shh进行clone push pull 
+
 ### 交给git托管的4种状态
 
 ![image-20230817172651112](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202308182350354.png)
