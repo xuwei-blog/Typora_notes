@@ -184,6 +184,92 @@ service cornd restart #重启任务调度
 
 
 
+## find & grep
+
+| 命令 | 基本语法              | 作用   |
+| ---- | --------------------- | ------ |
+| find | find   .   -name  “a" | 找文件 |
+| grep |                       | 找内容 |
+
+### find
+
+> 基础语法
+
+```shell
+find 目录 -测试表达式
+```
+
+> find后面所有内容都可以省略，默认有pirnt动作(换行显示)
+
+```shell
+find ./ -name a.jpg -print
+```
+
+```shell
+find . a.jgp
+```
+
+
+
+| type可选值 | 表示     |
+| ---------- | -------- |
+| f          | 普通文件 |
+| d          | 目录     |
+| l          | 软链接   |
+| s          | 套接字   |
+| b          | 块设备   |
+| c          | 字符设备 |
+| p          | 管道     |
+
+#### 常用案例
+
+> 案例
+
+```shell
+# 精确查找，完全匹配，当前目录下的所有a.txt文件
+find ./ -name a.txt -print
+find . -name a.txt
+# 查找当前目录下的a，但不确定是目录还是文件
+find . -name a -print -ls
+# 确定要查找的是目录,默认是逻辑与 -and
+find . -name a -a -type d -print -ls
+find . -name a -type d -print -ls
+# 使用通配符时，要加引号 " "
+find . -name "*abc*" -a -type d -print -ls
+# 查找当前目录下，名称是a，并且不是目录
+find . -name a -not -type d -print
+find . -name a ! -type d -print
+# 查找a，或者a.jpg,使用默认动作 -print
+find ./ -name a -o -name a.jpg
+# 查找a，或者a.jpg,不使用默认动作 -print ，打印内容有区别
+find ./ -name a -o -name a.jpg -ls   
+# 应该使用强制优先，()前面需要转义符，并且()需要有空格
+find ./ \( -name a -o -name a.jpg \) -ls   
+# 不区分大小写 -iname ，查找a
+find ./ -iname a
+# 查找空目录
+find . -empty -type d -ls
+# 控制输出格式,仅文件名
+find . -name a -printf "%f\n"
+# 控制输出格式,仅文件路径
+find . -name a -printf "%h\n"
+# 控制输出格式,仅搜索路径以外的内容
+find $(pwd) -name a -printf "%P\n"
+# 精确查找，当前目录下的所有a文件，输出到文件b中，没有b则创建，有则覆盖
+find . -name a -fls /tmp/b
+# 以上类似于
+find . -name a -fprint /tmp/b
+# 查找当前目录下a，排除`pwd`/ba 子目录 ,使用命令替换必须用引号
+find `pwd` ! -path "`pwd`/ba/*" -name a
+find `pwd` -name a ! -path "`pwd`/ba/*"
+# 查找深度为1 ，maxdepth全局选项，要求在 指定位置后，测试表达式之前
+find `pwd` -maxdepth 1 -name "[0-9].jpg"
+# 如果只想搜索2级目录
+find `pwd` -maxdepth 2 -mindepth 2 -name "[0-9].jpg"
+```
+
+
+
 ## 定时任务at
 
 > 基本介绍
@@ -315,7 +401,7 @@ ps -ef | grep atd
 >
 >     ```
 >     vim /etc/fstab
->                         
+>                                 
 >     # 编辑完之后
 >     mount -a 	# 自动挂载，使得永久挂载的设置生效
 >     ```
@@ -335,9 +421,9 @@ df -lh
 | 参数 | 功能                                        |
 | ---- | ------------------------------------------- |
 | -a   | –all,显示全部文件系统列表                   |
-| h    | 方便阅读的形式来显示结果                    |
+| -h   | 方便阅读的形式来显示结果                    |
 | -B   | 指定分区块大小                              |
-| l    | 只显示本地文件系统                          |
+| -l   | 只显示本地文件系统                          |
 | -i   | –inodes 列出 inode 资讯，不列出已使用 block |
 | -T   | 显示系统文件类型                            |
 | -P   | 输出格式为POSIX                             |
@@ -450,3 +536,10 @@ ping 127.0.0.1
 > LINUX中，每一个执行的 `程序` 被称为一个进程，会分配一个ID号（PID）
 >
 > 每个进程以两种方式存在，前台 和 后台
+
+
+
+
+
+
+
