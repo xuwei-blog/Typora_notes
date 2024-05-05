@@ -26,7 +26,15 @@
 >
 > 3. 将  `.pub`  后缀的公钥添加到github
 >
-> 4. 后续可以用shh进行clone push pull 
+> 4. 后续可以用ssh进行clone push pull 
+>
+> 5. 如果不能建立ssh链接，则是环境变量有变动
+>
+>    ```shell
+>    ssh -T git@github.com
+>    ```
+>
+>    ![image-20240428163715422](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202404281637649.png)
 
 ### 交给git托管的4种状态
 
