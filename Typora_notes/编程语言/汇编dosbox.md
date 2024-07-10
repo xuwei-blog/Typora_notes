@@ -293,6 +293,22 @@ push ax
 
 
 
+### adc
+
+```assembly
+# 进位相加 AX:0189h; BX:0183h
+add al，bl
+adc ah，bh
+
+# gao
+```
+
+
+
+
+
+
+
 
 
 ## 地址
@@ -334,6 +350,12 @@ push ax
 | SF     | 符号位，sign          | SF = 1 ， 表示为正数  ， PL   | SF = 0 ， 表示为负数  ， NG     |
 | CF     | 进位标志              | CF = 1  ,   表示进位   ，  CY | CF = 0  ,   表示没进位   ，  NC |
 | OF     | 溢出标志              | OF = 1  ,   表示溢出  ，OV    | OF = 0  ,   表示没溢出  ，NV    |
+
+
+
+### adc进位加
+
+
 
 
 
