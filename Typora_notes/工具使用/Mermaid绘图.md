@@ -17,7 +17,7 @@ https://github.com/mermaid-js/mermaid
 ### 如何使用Mermaid
 
 - 使用特定的Mermaid渲染器；
-- **使用集成了Mermaid渲染功能的Markdown编辑器，如[Typora](https://www.typora.io/)。**使用时，需要将代码块的语言选择为Mermaid。
+- **使用集成了Mermaid渲染功能的Markdown编辑器**，使用时，需要将代码块的语言选择为Mermaid。
 
 ### Mermaid能绘制哪些图
 
