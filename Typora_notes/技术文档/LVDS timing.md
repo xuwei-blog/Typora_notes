@@ -1,4 +1,4 @@
-# LVDS分析
+# LVDS时序
 
 [TOC]
 
