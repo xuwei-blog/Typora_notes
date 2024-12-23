@@ -22,7 +22,7 @@
 > - 数一下有几根数据线、接地线、控制信号线，这3类线==分批接线==，每批线接完都要检查
 > - 正式接线前，最好==在心中接一遍线==，尽量不要拆线
 
-![需要的工具](G:\total_resource\技术文档整理\LVDS\图片\需要的工具.jpg)
+![需要的工具](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231955643.jpg)
 
 
 
@@ -36,7 +36,7 @@
 > - 所有线都插完后，把==模具上的小扣子==挨个按一下，多余的线缠绕起来，然后准备用万用表测试
 >
 
-![如何插线](G:\total_resource\技术文档整理\LVDS\图片\如何插线.jpg)
+![如何插线](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412232000115.jpg)
 
 > notes：
 >
@@ -54,7 +54,7 @@
 > - 镊子放在如图所示==小扣子==的位置，==控制力度==将塑料片==略微翘起==
 > - 一边翘起，一边控制力度拔线
 
-![如何拔线](G:\total_resource\技术文档整理\LVDS\图片\如何拔线.jpg)
+![如何拔线](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231955580.jpg)
 
 > notes：
 >
@@ -70,7 +70,7 @@
 >
 > - 每根线单独缠一圈
 
-![如何缠线](G:\total_resource\技术文档整理\LVDS\图片\如何缠线.jpg)
+![如何缠线](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231955388.jpg)
 
 
 
@@ -84,7 +84,7 @@
 > - 再次检查pin1的位置，必须正确
 > - 一共连两根线，一根lvds，一根背光
 
-![硬件连接](G:\total_resource\技术文档整理\LVDS\图片\硬件连接.jpg)
+![硬件连接](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231955175.jpg)
 
 > notes：
 >
@@ -101,11 +101,11 @@
 > - 主板上所有裸露的金属外壳都接地，黑表笔接地，红表笔测供电引脚，要求不能有警报
 > - 背光供电，lvds显示供电，都要验证
 
-![万用表](G:\total_resource\技术文档整理\LVDS\图片\万用表.jpg)
+![万用表](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231956930.jpg)
 
 
 
-![接地](G:\total_resource\技术文档整理\LVDS\图片\接地.jpg)
+![接地](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231956443.jpg)
 
 3. 使用万用表验证接地线
 
@@ -136,17 +136,17 @@
 > - 给主板接一个可以正常显示的屏，并且给主板安装好系统、官网驱动
 > - 设置BIOS，启动LVDS并选择分辨率
 
-![73576a8f1adfb494d40747c5427ae15](G:\total_resource\技术文档整理\LVDS\图片\73576a8f1adfb494d40747c5427ae15.jpg)
+![73576a8f1adfb494d40747c5427ae15](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231956913.jpg)
 
 **调BIOS步骤**
 
-![142e9f15c36f03fd45c8c5bb095d020](G:\total_resource\技术文档整理\LVDS\图片\142e9f15c36f03fd45c8c5bb095d020.jpg)
+![142e9f15c36f03fd45c8c5bb095d020](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231956510.jpg)
 
-![99d1d3430e4a992217c0051c91f0fa7](G:\total_resource\技术文档整理\LVDS\图片\99d1d3430e4a992217c0051c91f0fa7.jpg)
+![99d1d3430e4a992217c0051c91f0fa7](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231956411.jpg)
 
-![8c53be549e73562e37de155b17cedfc](G:\total_resource\技术文档整理\LVDS\图片\8c53be549e73562e37de155b17cedfc.jpg)
+![8c53be549e73562e37de155b17cedfc](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231956952.jpg)
 
-![97b973b363721f1f648753e4ce43a9a](G:\total_resource\技术文档整理\LVDS\图片\97b973b363721f1f648753e4ce43a9a.jpg)
+![97b973b363721f1f648753e4ce43a9a](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231956295.jpg)
 
 > notes：
 >
@@ -174,7 +174,7 @@
 > - 主板通电的过程中，表笔==不要随意测量==，避免表笔探针将两引脚短路
 > - 如果lvds显示和背光都没有供电，背光使能处于无效状态，则进行线序测试
 
-![40c824705c1902b0630314e5b07e272](G:\total_resource\技术文档整理\LVDS\图片\40c824705c1902b0630314e5b07e272.jpg)
+![40c824705c1902b0630314e5b07e272](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231957657.jpg)
 
 > notes：
 >
@@ -190,7 +190,7 @@
 > - 目的：给主板一个det信号，让主板进行供电
 > - 将如图接口插入主板，上电测试lvds显示供电 和 背光供电，如果有供电，则表明之前lvds线序有问题，如果没有供电，则表明det信号有问题
 
-![f6d089ebac8eb99fca75fc22b87d4e8](G:\total_resource\技术文档整理\LVDS\图片\f6d089ebac8eb99fca75fc22b87d4e8.jpg)
+![f6d089ebac8eb99fca75fc22b87d4e8](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231957571.jpg)
 
 > notes：
 >
@@ -218,7 +218,7 @@
 > - 蓝色虚线是 电子枪 回到下一行开头的路径
 > - 黄色虚线是 一场画面扫描结束后 电子枪回到第一行
 
-![显示屏](G:\total_resource\技术文档整理\LVDS\图片\显示屏.jpg)
+![显示屏](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231957606.jpg)
 
 > notes：
 >
@@ -232,7 +232,7 @@
 >
 > - 扫描方式有没有可能是垂直方向的呢？这个问题可能会导致屏幕故障后是显示==竖条纹或者横条纹==
 >
->     ![垂直扫描](G:\total_resource\技术文档整理\LVDS\图片\垂直扫描.jpg)
+>     ![垂直扫描](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231957717.jpg)
 
 
 
@@ -243,7 +243,7 @@
 > - 黄色区域，为可视区域，相当于把一幅画按比例裁剪成1280*1024的画面
 > - 绿色区域，现实中为屏幕上的黑边，该区域电子枪也会扫描到
 
-![显示屏参数](G:\total_resource\技术文档整理\LVDS\图片\显示屏参数.jpg)
+![显示屏参数](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231957410.jpg)
 
 **为了方便做记号，逻辑上将黄色可视区域缩小**
 
@@ -265,7 +265,7 @@
 >
 > - 右下到左上的虚线为 Vertical Blanking，简称VB
 
-![绿色](G:\total_resource\技术文档整理\LVDS\图片\绿色.jpg)
+![绿色](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231957285.jpg)
 
 > notes：
 >
@@ -300,7 +300,7 @@ VESA**标准**
 >
 > - 创建一个专门存放LVDS的目录，将工具、数据整理好
 
-![文件夹介绍](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\文件夹介绍.png)
+![文件夹介绍](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231957387.png)
 
 
 
@@ -312,16 +312,16 @@ VESA**标准**
 >
 > - 没有提到的功能，暂时可以全部默认
 
-![步骤2](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤2.png)
+![步骤2](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231957497.png)
 
-![步骤3](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤3.png)
+![步骤3](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231957759.png)
 
 > notes：
 >
 > - 选择6bit单/双通道 或 8bit单/双通道
 > - 物理尺寸含显示器边框
 
-![步骤5](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤5.png)
+![步骤5](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231957983.png)
 
 > notes：
 >
@@ -343,7 +343,7 @@ VESA**标准**
 >
 > - ⑫选择水平同步和垂直同步有效方式
 
-![步骤13](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤13.png)
+![步骤13](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231957692.png)
 
 > notes：
 >
@@ -355,49 +355,49 @@ VESA**标准**
 
 
 
-![步骤15](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤15.png)
+![步骤15](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231957471.png)
 
 
 
-![步骤16](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤16.png)
+![步骤16](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231958272.png)
 
 
 
-![步骤18](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤18.png)
+![步骤18](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231958433.png)
 
 
 
-![步骤21](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤21.png)
+![步骤21](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231958169.png)
 
 
 
-![步骤22](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤22.png)
-
-
-
-
-
-![步骤23](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤23.png)
-
-
-
-![步骤24](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤24.png)
+![步骤22](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231958834.png)
 
 
 
 
 
-![步骤25](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤25.png)
+![步骤23](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231958512.png)
 
 
 
-![步骤26](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤26.png)
+![步骤24](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231958762.png)
 
 
 
 
 
-![步骤27](G:\total_resource\技术文档整理\LVDS\图片\ch7511步骤\步骤27.png)
+![步骤25](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231958445.png)
+
+
+
+![步骤26](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231958327.png)
+
+
+
+
+
+![步骤27](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412231958076.png)
 
 
 
@@ -429,9 +429,9 @@ VESA**标准**
 >
 >     ​        VB = 42 = 2 + T~垂直前浪~ + T~垂直后浪~ ， 假设T~垂直前浪~ 为 2 T~h~ ， T~垂直后浪~ = 38
 
-![时序参数](G:\total_resource\技术文档整理\LVDS\图片\时序参数.png)
+![时序参数](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412232000177.png)
 
-![时序图分析](G:\total_resource\技术文档整理\LVDS\图片\时序图分析.png)
+![时序图分析](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412232000613.png)
 
 
 
@@ -443,13 +443,13 @@ VESA**标准**
 >
 > - 安装AUX的驱动
 
-![驱动](G:\total_resource\技术文档整理\LVDS\图片\Udp7511步骤\驱动.png)
+![驱动](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412232001538.png)
 
 
 
 2. 准备工作
 
-![准备工作](G:\total_resource\技术文档整理\LVDS\图片\Udp7511步骤\准备工作.png)
+![准备工作](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412232001070.png)
 
 3. 刷固件
 
@@ -457,9 +457,9 @@ VESA**标准**
 >
 > - 需要将参数打包给Udp7511v1.3，才能刷入固件，直接打开Udp7511没有作用
 
-![步骤1](G:\total_resource\技术文档整理\LVDS\图片\Udp7511步骤\步骤1.png)
+![步骤1](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412232001477.png)
 
-![步骤4](G:\total_resource\技术文档整理\LVDS\图片\Udp7511步骤\步骤4.png)
+![步骤4](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202412232001042.png)
 
 
 
