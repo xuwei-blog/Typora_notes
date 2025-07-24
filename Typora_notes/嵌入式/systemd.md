@@ -10,17 +10,50 @@
 /usr/lib/systemd/system/ # 包管理器创建的
 ```
 
+## 📌 小提示
+
+> 看日志方法
+
+```
+less
+```
 
 
 
-
-# 一、 Networkmanager网络切换
+# 一、 Networkmanager网络切换日志分析
 
 你提供的 `journalctl` 日志片段展示了 **NetworkManager** 在 **切换网络连接配置（从 NetworkTest3 到 NetworkTest）** 的全过程。我们来逐句分析日志内容，帮助你理解 **NetworkManager 是如何处理网络接口的切换和自动激活的**。
 
 ---
 
 ## 🧩 背景说明
+
+```
+7月 14 10:26:33 station1 NetworkManager[701]: <info>  [1752459993.8143] audit: op="connection-update" uuid="f6ac9c46-7e15-49bf-8461-450dddafe5a1" name="NetworkTest3" pid=80812 uid=1000 result="fail" reason="Insufficient privileges"
+7月 14 10:27:04 station1 NetworkManager[701]: <info>  [1752460024.8731] audit: op="connection-update" uuid="f6ac9c46-7e15-49bf-8461-450dddafe5a1" name="NetworkTest3" args="connection.timestamp,ipv4.addresses" pid=82951 uid=0 result="success"
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3410] device (enp1s0): state change: activated -> deactivating (reason 'user-requested', sys-iface-state: 'managed')
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3420] manager: NetworkManager state is now DISCONNECTING
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3447] audit: op="connection-deactivate" uuid="f6ac9c46-7e15-49bf-8461-450dddafe5a1" name="NetworkTest3" pid=82951 uid=0 result="success"
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3732] device (enp1s0): state change: deactivating -> disconnected (reason 'user-requested', sys-iface-state: 'managed')
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3885] manager: NetworkManager state is now DISCONNECTED
+
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3901] policy: auto-activating connection 'NetworkTest' (49183910-6b96-4879-ab50-0984844529e7)
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3908] device (enp1s0): Activation: starting connection 'NetworkTest' (49183910-6b96-4879-ab50-0984844529e7)
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3910] device (enp1s0): state change: disconnected -> prepare (reason 'none', sys-iface-state: 'managed')
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3915] manager: NetworkManager state is now CONNECTING
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3917] device (enp1s0): state change: prepare -> config (reason 'none', sys-iface-state: 'managed')
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3928] device (enp1s0): state change: config -> ip-config (reason 'none', sys-iface-state: 'managed')
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3964] device (enp1s0): state change: ip-config -> ip-check (reason 'none', sys-iface-state: 'managed')
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3993] device (enp1s0): state change: ip-check -> secondaries (reason 'none', sys-iface-state: 'managed')
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3995] device (enp1s0): state change: secondaries -> activated (reason 'none', sys-iface-state: 'managed')
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.3999] manager: NetworkManager state is now CONNECTED_LOCAL
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.4003] manager: NetworkManager state is now CONNECTED_SITE
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.4005] policy: set 'NetworkTest' (enp1s0) as default for IPv4 routing and DNS
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.4012] device (enp1s0): Activation: successful, device activated.
+7月 14 10:27:24 station1 NetworkManager[701]: <info>  [1752460044.4019] manager: NetworkManager state is now CONNECTED_GLOBAL
+```
+
+
 
 你使用了 `nmtui` 修改了一个名为 `NetworkTest3` 的连接配置（可能是将其 IP 从固定 IP 改为 DHCP 或者其他更改），并保存后选择“自动应用”。这时：
 
@@ -182,4 +215,31 @@ sudo pkill -HUP polkitd
 
 
 
-## 
+##查看cpu温度
+
+查看热区的type类型
+
+```
+for i in /sys/class/thermal/thermal_zone*; do \
+    echo -n "$(basename $i): "; \
+    cat $i/type; \
+done
+# 输出如下
+thermal_zone0: cpu-thermal
+thermal_zone1: gpu-thermal
+thermal_zone2: npu-thermal
+thermal_zone3: ambient-temperature
+```
+
+![4423109e2dee26fa67ebd0df3ab910b](https://typora-notes-codervv.oss-cn-shanghai.aliyuncs.com/img_for_typora/202507171205230.png)
+
+
+
+除了 `critical`，还有其他几种常见的温度阈值类型：
+
+| 类型       | 描述                                           | 动作示例                       |
+| ---------- | ---------------------------------------------- | ------------------------------ |
+| `active`   | 当温度达到此阈值时，开始主动降温措施           | 如增加风扇转速、降低CPU频率等  |
+| `passive`  | 当温度达到此阈值时，开始被动降温措施           | 如降低系统负载、进入低功耗模式 |
+| `hot`      | 表示温度较高，但尚未达到需要立即采取行动的程度 | 可能会触发一些非紧急的冷却措施 |
+| `critical` | 达到此温度时，系统必须立即采取紧急措施         | 如强制关机、触发内核 panic     |
